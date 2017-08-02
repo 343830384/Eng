@@ -6,12 +6,12 @@
 
 
 
-####<font color='blue'>关于Eng:</font>
+####关于Eng:
 <font style="color: #107663;font-weight: bolder;">
 Eng 取自engine 的缩写,寓意可以向引擎一样快而简的将数据结构 与dom结构 紧密的契合驱动, 
 以惯性思维的方式,在大多数场景下化繁就简的处理数据及dom交互.
 </font>
-####<font color='blue'>Eng的由来:</font>/<br>
+####<font color='blue'>Eng的由来:</font>
 <font style="color: #107663;font-weight: bolder;">
     作者本人主要从事js交互及特效编写,时间并不长.</br>
 心得认为:大部分插件的编写,如果能够发现其内在的逻辑规律,
