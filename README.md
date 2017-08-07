@@ -6,6 +6,7 @@
 <br>
 <br> 
 ###About Eng:
+<br>
         Eng is abbreviated from "Engine".By using this shortened sign,we mean it can
         actually act as an engine to drive the Data-structure & the Dom-structure 
         organically and coherently.If we prefer to adopt "inertial thinking" policy 
@@ -18,6 +19,7 @@
         and react tool commonly used functions
 
 ####Origin of Eng:
+<br>
 
        The author by accident in colleagues there to contact and to know that such 
        tools, think they are using a complex idea or strategy, to solve a simple 
@@ -33,7 +35,8 @@
        similar tools for front-end development, is the essential difference between 
        understanding thoughts in A different way
 
-####The idea of Eng
+####The idea of Eng:
+<br>
        Eng 'inertial thinking' thought is based on the inherent law of usage 
        environment, form the habitual way, ignore the production tools 
        Complex, will focus on solving things' objective 'complex;
