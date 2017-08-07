@@ -1,41 +1,53 @@
 
-[中文      API]()
+[中文      API](http://www.jianshu.com/p/cd3e1d24bbb9)
 <br>  
-[English API]()
+[English API](http://www.jianshu.com/p/ffae02a89393)
 <br>
 <br>
 <br> 
-###关于Eng:
+###About Eng:
+        Eng is abbreviated from "Engine".By using this shortened sign,we mean it can
+        actually act as an engine to drive the Data-structure & the Dom-structure 
+        organically and coherently.If we prefer to adopt "inertial thinking" policy 
+        in analyzing the challenging problem that confronts us,the interaction 
+        between data  processing and the Dom-structure can be simplified on 
+        most ocassions.
 
-     Eng 取自 engine 的缩写,寓意可以向 引擎 一样快而简的将 '数据结构' 与 'dom结构' 紧密的契合驱动, 
-       以 '惯性思维' 的方式,在大多数场景下化繁就简的处理数据及dom交互.
+        Eng is componentized solution, Currently only 11 KB ,Only five basic 
+        instruction and five (option/methods),You can achieve angular , vue 
+        and react tool commonly used functions
 
-     Eng 是组件化的解决方案,  目前仅有 11kb ,只有5个基本指令,4个 选项方法,就可以实现 angular vue 和 react等, 前端工具常用功能
+####Origin of Eng:
 
-####Eng的由来:
+       The author by accident in colleagues there to contact and to know that such 
+       tools, think they are using a complex idea or strategy, to solve a simple 
+       matter.
 
-       作者主要从事js交互及特效编写,心得认为:大部分插件的编写,如果能够基于其使用环境的内在逻辑规律, 
-       并设计相应的 逻辑和dom 结构,将会极大的简化编写 复杂程度 和 使用难度 并提升代码效率..
+       To solve things logically complex is' objective 'existence, but the
+       complexity of the solution is a' subjective '.
 
-       作者偶然在同事那里接触并粗浅了解一下相关的工具,认为它们在用一种复杂的思想或策略,
-       去解决一件简单的事情.
+       Authors abhor 'subjective' complex, think there are more concise 'inertial 
+       thinking' solutions.
 
-       待解决事物的 逻辑上的复杂是'客观'存在的, 但解决方案的复杂程度是'主观'上的. 
+       This is the origin of Eng, so the emergence of Eng with A, b and C and other 
+       similar tools for front-end development, is the essential difference between 
+       understanding thoughts in A different way
 
-       作者厌恶一切主观上的复杂,认为我有更简洁的 ' 惯性思维' 解决方案, 并乐于 '造轮子'.
+####The idea of Eng
+       Eng 'inertial thinking' thought is based on the inherent law of usage 
+       environment, form the habitual way, ignore the production tools 
+       Complex, will focus on solving things' objective 'complex;
 
-       这就是Eng的由来 , 所以Eng的出现与angular vue 和 react等工具 的本质区别是对前端世界理解的思想方式之争
-     
-       
+       All behavior in Eng all around a 'base', this is also a page of the dom 
+       tree structure regularity, Eng completely according to keep the dom 
+       rendering logic rules
 
-####Eng的思想:
+       Eng only five basic instruction and 5 (option/method), the future is likely 
+       to complement,but not is the core or need special learning;
 
-     刚有提到 '惯性思维',何谓'惯性思维'?
-     惯性思维是基于使用环境的内在规律, 形成习惯地性的处理方式,忽略使用工具的复杂,将重点放在解决事物上
+       Eng data structure and the dom hierarchy in the exact match, (in the data, 
+       and all of the key values of an Array and a json object as' base ');
 
-     Eng中所有的行为均围绕着一个 基础/base ,这也是页面 dom 树的结构, Eng 完全遵守dom渲染逻辑规则;
-     Eng使用的只有基本的5个指令和4个选项方法,未来可能会有所补充,但不会是核心或需要特别学习的;
-     Eng中数据结构与dom分级结构完全匹配 , (数据中,所有Array和json对象的key值 ,皆为base);
-     Eng的'惯性思维'基于严格规律逻辑,也就是后续所有升级新特性的支持,将会one-take.不会出现全家桶等额外插件,
-     仅会有本地端 和 服务端两个主文件
-       
+       Eng's 'inertial thinkingt' based on strict rules of logic, which is all 
+       subsequent upgrade  the support of the new features will not be additional 
+       components,There will be only local client and server two main file.
