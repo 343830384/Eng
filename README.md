@@ -18,6 +18,9 @@
         Eng is componentized solution, Currently only 11 KB ,Only five basic 
         instruction and five (option/methods),You can achieve angular , vue 
         and react tool commonly used functions
+        
+        Eng has an exceptional performance in all similar software, as well as minimal 
+        learning difficulty.
 
 #### Origin of Eng:
 
