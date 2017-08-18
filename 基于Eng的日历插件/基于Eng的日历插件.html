@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>基于Eng的日历插件</title>
+			<style>
+			*{
+				 margin: 0 auto;
+				 padding: 0;
+				 box-sizing: border-box;
+			}
+	/*226 262*/
+	.c_body{
+		 position: absolute;
+		 width: 226px;
+		 height: 262px;
+		 background: #FFFFFF;
+			border: 1px solid #D9D9D9;
+			box-shadow: 0 1px 4px 0 rgba(0,0,0,0.20);
+			border-radius: 4px;
+		 user-select:none;
+			display: none;
+	}
+	/* .c_top  */
+.c_top{
+	 width: 100%;
+	 height: 35px;
+	 line-height: 35px;
+	 text-align: center;
+	 border-bottom:1px solid #E9E9E9;
+}
+.c_top_arrows{
+	  display: inline;
+	  margin-top:6px;
+	  height:20px ;
+	  line-height: 20px;
+	  font-size: 20px;
+	  color: #888888;
+	  /*border: 1px solid cornflowerblue;*/
+}
+.c_top_l{
+	  float:left;
+	  margin-left:10px;
+	  /*border: 1px solid red;*/
+}
+.c_top_r{
+	  float:right;
+	  margin-right:10px;
+}
+.c_top_arrows span{
+	 display: inline-block;
+	 width:15px;
+	 cursor: pointer;
+}
+.c_date{
+	 font-size: 12px;
+  color: #666666;
+}
+/*   .c_mid        */
+.c_mid{
+	 width: 100%;
+	 height: 191px;
+ 	border-bottom:1px solid #E9E9E9; 
+}
+.c_main{
+	 width: 200px;
+	 height:100%;
+}
+.c_floor{
+	  width: 100%;
+	  height: 20px;
+	  margin-top:7px;
+}
+.c_floor span{
+	  display:block;
+	  float: left;	
+   width: 20px;
+   height: 20px;
+   line-height: 20px;
+   font-size:12px;
+   color: #CCCCCC;
+   text-align: center;
+}
+.c_floor:nth-child(1) span{
+	  color: black;
+}
+.c_floor span~span{
+	 margin-left: 10px;
+}
+
+.table{
+	 width:210px;
+	 height:163px;
+	 margin-top:8px;
+	 /*margin-top:7px;*/
+}
+.table dd{
+	 float:left;
+	 width:30px;
+	 height:27px;
+	 line-height:27px;
+	 text-align:center;
+}
+.table span{
+	  display:block;
+	  float: left;	
+   width: 20px;
+   height: 20px;
+   line-height: 20px;
+   font-size:12px;
+   color: #CCCCCC;
+   text-align: center;
+   cursor: pointer;
+}
+.table .c_today{
+	 color: #FFFFFF;
+	 background: #4B4B64;
+  border-radius: 2px;
+}
+.table .c_allow{
+   color: #666666 ;
+}
+.table .c_select{
+	  color: #666666;
+	  background: #E9E9EC;
+}
+.table .c_allow:hover{
+	line-height: 18px;
+	font-weight: 600;
+	border: 1px solid #4B4B64;
+ border-radius: 2px;
+}
+/*  .c_bottom  */
+.c_bottom{
+	 width: 100%;
+	 height: 36px;
+	 line-height: 25px;
+	 text-align: center;
+}
+.c_bottom  .c_getnow{
+	font-size: 12px;
+ color: #4B4B64;
+ cursor: pointer;
+}
+</style>
+	</head>
+	<body>
+<!-- calendar start-->   		
+<div class="c_body" id='app' e-id='calendar' style="">
+   	<div class="c_top">
+				   		<div class="c_top_arrows c_top_l">
+				   			<span e-id='prevYear'>«</span><span e-id='prevMonth'>‹</span>
+				   		</div>
+				   		<span align="center" class="c_date">
+				   			<span e-id='year'>2017</span>年<span e-id='month'>8</span>月
+				   		</span>
+				   		<div class="c_top_arrows c_top_r">
+				   			<span e-id='nextMonth'>›</span><span e-id='nextYear'>»</span>
+				   		</div>
+    </div>
+    <div class="c_mid">
+					   	<div class="c_main">
+								   		<div class="c_floor">
+								   			<span e-for='week'>{{$_value}}</span>
+								   		</div>
+								   		<dl class='table' e-id='table'>
+								   			   <dd e-for='day'><span e-attr='class=cls'>{{v}}</span></dd>
+								   		</dl>
+					   	</div>
+    </div>
+		  <div class="c_bottom">
+		  	       <span class="c_getnow" e-id='today' >今天</span>
+		  </div>
+</div>
+<!-- calendar 结束-->   
+   
+<input type="text" placeholder="日期"  id='date1' /> <input type="text" style="margin-left:100px;" placeholder="日期"  id='date2' /> 
+
+	</body>
+</html>
+<script type="text/javascript" src="js/eng_0.8.1.beta.min.js" ></script>
+<script type="text/javascript" src="js/eng_calendar.js" ></script>
+<script>
+	var app=new Eng({
+		    el:document.getElementById('app'),
+		    data:{
+		    	 week:['日','一','二','三','四','五','六'],
+		    	  day:[]
+		    	  
+		    },
+		    created:function(eng){
+		    	      var calendar=new Eng_Calendar(eng);
+		    	         //calendar.open();
+		    	         //calendar.close();
+		    	      var start,end;
+
+                 document.getElementById('date1').onfocus=function(){
+                 	   var th=this;
+                 	    calendar.open({
+                 	    	   el:th,                  //参照dom 对象 ,用于定位
+//               	    	   start:[year,month,day], //设置开始日期 可忽略
+                 	    	   end:end?end:null,       //设置结束日期 可忽略
+//               	    	   inint[year,month,day],  // 设定默认显示日期 可忽略
+                 	    },function(Date){
+                 	    	 start=Date;
+                 	    	  th.value=Date.join('-');
+                 	    })
+                 };
+                 document.getElementById('date2').onfocus=function(){
+                 	  var th=this;
+                 	    calendar.open({
+                 	    	   el:this,
+                 	    	   start:start?start:null,
+//               	    	   end:[year,month,day],
+//               	    	   inint[year,month,day],
+                 	    },function(Date){
+                 	    	   end=Date;
+                 	    	   th.value=Date.join('-');
+                 	    })
+                 };
+                 
+		    	  	
+		    }
+	});
+	
+	
+	
+	
+</script>
