@@ -21,6 +21,10 @@
          Eng 可以像jquery只需基础的理解, 便可摸索一通百通 
          
          Eng 拥有不逊色于所有同类软件的优异性能
+         
+         Eng所有更新原则只为 简 , 不会出现任何全家桶, 额外的强制思想理念
+         
+         Eng作者承诺本地端最终版本,体积不会超过20kb
 ### About Eng:
 
         Eng is abbreviated from "Engine".By using this shortened sign,we mean it can
