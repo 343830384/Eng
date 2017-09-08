@@ -1,4 +1,4 @@
-	var Eng_position=function(obj){
+var Eng_position=function(obj){
 		   var t,l,h,w,wh,ww,sh,sl,bd=document.body;
 		       t=obj.offsetTop,l=obj.offsetLeft,h=obj.offsetHeight,w=obj.offsetWidth,wh=window.innerHeight,ww=window.innerWidth,sh=bd.scrollTop,sl=bd.scrollLeft;
 		     return [t,l,h,w,wh,ww,sh,sl];   
