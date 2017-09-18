@@ -7,7 +7,7 @@
 <br> 
 
 ### 版本进度:
-             下个版本将提供服务端支持/The next version will support the server side
+     下个版本将提供服务端支持/The next version will support the server side
 
 ### 关于 Eng:
          Eng 取自 engine 的缩写,寓意可以向 引擎 一样快而简的将 '数据结构' 与 'dom结构'
