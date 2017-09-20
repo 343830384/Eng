@@ -20,7 +20,7 @@
         most ocassions.
 
         Eng is a lightweight data rendering and plug-in development javascript framework, 
-        currently only 13kb
+        currently only 12kb
         
         With the lowest learning curve and easier implementation, Eng has the lowest learning 
         curve, and can realize all the basic functions of the angular ,vue and react.
@@ -36,7 +36,7 @@
          Eng 取自 engine 的缩写,寓意可以向 引擎 一样快而简的将 '数据结构' 与 'dom结构'
              紧密的契合驱动,以 '惯性思维' 的方式,在大多数场景下化繁就简的处理数据及dom交互.
 
-         Eng 是超轻量级的前后端数据逻辑渲染与交互js框架,目前仅13kb,就可以实现 
+         Eng 是超轻量级的前后端数据逻辑渲染与交互js框架,目前仅12kb,就可以实现 
              angular, vue 和 react等, 前端工具基本功能
          Eng 可以轻易的实现类似excel的 函数 乃至更复杂的数据逻辑渲染
          Eng 支持单向和 双向数据渲染
