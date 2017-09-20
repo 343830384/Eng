@@ -47,7 +47,5 @@
          Eng 作者承诺本地端最终版本,体积不会超过20kb
 ## License
 
-[APACHE2]( )
-
-Copyright (c) 2017-present, Xin Wang
+[![License](http://img.shields.io/badge/license-APACHE2-blue.svg)](LICENSE.txt)
 
