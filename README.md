@@ -47,7 +47,7 @@
          Eng 作者承诺本地端最终版本,体积不会超过20kb
 ## License
 
-[MIT](http://opensource.org/licenses/MIT)
+[APACHE2]( )
 
 Copyright (c) 2017-present, Xin Wang
 
