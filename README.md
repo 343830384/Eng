@@ -12,7 +12,11 @@
 ### 版本进度:
           下个版本将提供服务端支持/The next version will support the server side
 
-
+### 开发思想:
+    Eng 致力于简化所有页面数据渲染与交互操作 ,尽可能的接近融入原生web使用环境,抛弃所有同类工具
+        中对Eng没有意义的思想和理念,并达成相同的结果和目的.
+    Eng 仅提供最优,最简,最易的局部轮子,以及所有向上支持能力,不提供任何成套化
+           的标准流水线体系,仅提供可以组织大型项目的能力 ,不强制你应该怎么做,仅提供基本的示范,细节补充源自你的项目,不源于我
 ### About Eng:
 
         Eng is abbreviated from "Engine".By using this shortened sign,we mean it can
