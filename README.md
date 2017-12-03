@@ -11,6 +11,7 @@
 
 ### 版本进度:
           下个版本将提供服务端支持/The next version will support the server side
+	  (工作变动,未来补充....)
 
 ### 开发思想:
     Eng 致力于简化所有页面数据渲染与交互操作 ,尽可能的接近融入原生web使用环境,抛弃所有同类工具
