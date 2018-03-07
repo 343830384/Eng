@@ -34,7 +34,7 @@
 
 ### 作者吐槽
    
-   * ................算了不说了
+   * ................
 ## License
 
 [![License](http://img.shields.io/badge/license-APACHE2-blue.svg)](LICENSE.txt)
