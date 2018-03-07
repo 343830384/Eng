@@ -9,55 +9,33 @@
 <br>
 <br> 
 
-### 版本进度:
-   * 下个版本将提供服务端支持/The next version will support the server side
-   * 
-   * 散心闲置了几个月,近日将发布Eng的服务端, PS: 服务端渲染 和 其它功能 ....;
-   * 下个版本Eng 本地端 将支持组件Active行为, PS:现版本也可自行实现 ,主要为配合服务端的 易用版 ;
-   * 下个或再下个的版本将部分支持 Excel的函数公式语法 ,用于表格数据的 逻辑运算)
+## ENG
 
-### 开发思想:
-    Eng 致力于简化所有页面数据渲染与交互操作 ,尽可能的接近融入原生web使用环境,抛弃所有同类工具
-        中对Eng没有意义的思想和理念,并达成相同的结果和目的.
-		
-    Eng 仅提供最优,最简,最易的局部轮子,以及所有向上支持,能够完成大型项目的基本能力和基本范例.
-    
-### 关于 Eng:
-         Eng 取自 engine 的缩写,寓意可以向 引擎 一样快而简的将 '数据结构' 与 'dom结构'
-             紧密的契合驱动,以 '惯性思维' 的方式,在大多数场景下化繁就简的处理数据及dom交互.
+   * Eng 是组件化数据渲染 构建用户界面的 JS 插件/库/框架 
+   * Eng 拥有最简明 , 最少的API 却可以更容易的实现达成同类工具的高阶功能
+   * Eng 具有同类js工具中最优异的性能,和12Kb的体积, 并且仅有8个基本指令 ,7个方法 
+   * Eng 支持单双向绑定,列表,响应,普通数据处理
+   * Eng 支持列表数据过滤处理,数据过滤时允许单独对全局任意数据建立响应关系
+   * Eng 支持组件扩展追加,没有父子组件通信的概念 并且没有必要写成父子的形式,组件间通信自行根据watcher方法或数据过滤逻辑约定 
 
-         Eng 是超轻量级的前后端数据逻辑渲染与交互js插件, 仅12kb, 相对于主流 的angular ,vue ,react 
-             拥有最低的学习曲线 ,更简易的实现方式,实现三者 本地端 数据组件化渲染 功能
-         Eng 基础上可以容易的实现类似excel的 函数 乃至更复杂的数据逻辑渲染
-         Eng 支持单向和 双向数据渲染
-         Eng 可以轻易在循环数据中 对内或对全局 建立watcher双向绑定关系
-         Eng 使用上偏重于运用的技巧, 像jquery只需理解基础的方法, 便可自由使用摸索
-         Eng 拥有不逊色于所有同类工具的优异性能
-         
-         	
-### About Eng:
+### 声明
 
-        Eng is abbreviated from "Engine".By using this shortened sign,we mean it can
-        actually act as an engine to drive the Data-structure & the Dom-structure 
-        organically and coherently.If we prefer to adopt "inertial thinking" policy 
-        in analyzing the challenging problem that confronts us,the interaction 
-        between data  processing and the Dom-structure can be simplified on 
-        most ocassions.
+   * Eng 致力于精简所有同类工具中的技术玄学 ,  用最 简明、简易和最少的API实现同类工具的核心部分 ,摒除一切冗余的学习内容,无谓的蹉跎,并达成同样的目的.
+   * Eng 需理解 watcherFor 才可大成 , 自能实现Excel的函数, 实现复杂的交互逻辑 ,其它只需看看
+   * 对于单纯页面渲染 , 用jquery等操作 ,部分页面有SEO需求 和 对极致性能追求, 请参考 Eng-NOS 和 Eng-Drive 并只用看e-base、e-attr、e-html、e-for 四个指令
 
-        Eng is a lightweight data rendering and plug-in development javascript framework, 
-        currently only 12kb
-        
-        With the lowest learning curve and easier implementation, Eng has the lowest learning 
-        curve, and can realize all the basic functions of the angular ,vue and react.
-        
-        Eng supports one-way and two-way data rendering.
-        
-        Eng can easily implement functions like Excel and even more complex data logic rendering
-        
-        Eng can easily set up 'watcher' and Dom events in the loop data either internally or global
-        
-        Eng ,like jQuery, only needs to know the basic methods and then be free to use
+### 版本进度说明
 
+   * 0.9 (当前) 版本..
+   * 1.0  (2018/3/7 月底前上线)
+   * 1.0  将增加跨页面数据状态管理, 更易用浅显傻大白的组件通信
+   * 1.0  将增加组件Active行为,和上条更新做为 [Eng](https://github.com/343830384/Eng-Drive) 的配套更新
+   * 1.0  修缮API手册
+   * 1.1  鉴于 watcherFor 部分人实现excel列表逻辑困难 , 1.1 版本列表渲染将支持套用Excel语法
+
+### 作者吐槽
+   
+   * ................算了不说了
 ## License
 
 [![License](http://img.shields.io/badge/license-APACHE2-blue.svg)](LICENSE.txt)
