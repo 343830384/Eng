@@ -8,3 +8,4 @@
        因为Eng有参数类型校验机制 , 
        所以json对象数据清空的方式为 json={} 空json , 
 	   array类型数据同理 array=[] 空array;
+	   新增id 命名传入参数, 用以区分不同的组件
