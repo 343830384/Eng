@@ -6,7 +6,7 @@
 ## [EngJs官网](http://www.engjs.cn/)
 <br>
 
-# ENG
+# Eng
 
   * Eng 是一款 MVVM 模式超 轻量级的 组件化数据渲染 JS 本地插件 ， 仅有16kb 。
 但却支持 React 、 Vue 、 Angular 全家桶套餐的主要核心功能 ， 因此是这三类工具外另一种更
