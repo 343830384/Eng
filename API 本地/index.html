@@ -619,9 +619,9 @@ var app = new Eng({
 ###<a style="color:red" name='107' class="mt60">数据状态共享</a> ：
 <br>
 ```
-// 完整封装配置参考列表 可省略
+// 使用配置 完整参考列表 
   var config={
-          app:{     //app 与是封装命名 $_xxx 的xxx部分
+          app:{     //app 应与封装命名 $_xxx 的xxx部分同名
 
               el:...  ,       // 页面已有 idName 或 dom对象 ，组件生成后的填充目标
               id：'app',      // id：的app与app应同名 ，注意命名合法性 ， 若不打算使用 relate 组件关联通信 和 数据共享 可忽略
@@ -779,9 +779,14 @@ var app = new Eng({
 </div>  
 <iframe src="./api.html" id='test' ></iframe>
 <div id='click'>点击尝试</div>
- 
+ <div id='ft'>
+   <br>
+   <div>
+   <img src="http://www.beian.gov.cn/img/ghs.png" alt="备案标识"/>
+    <a rel="nofollow"target="_blank"  href="http://www.miitbeian.gov.cn/">蒙ICP备18001225号</a>
+   </div>
  </div>
 </body>
 </html>
-<script src="./js/showdown1.8.6.min.js"></script>
+<script src="https://cdn.bootcss.com/showdown/1.8.6/showdown.min.js"></script>
 <script src="./js/index.js"></script>
