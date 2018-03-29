@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="UTF-8">
+    <title>EngJs API</title>
+    <!-- <link rel="shortcut icon" type="image/ico" href="../img/favicon.ico"> -->
+    <meta name="keywords" content="eng,engjs,engjs API,eng 官网" />
+    <meta name=”Description” Content=”EngJs API 在线使用学习手册”>
+    <!-- <script type="text/javascript" src="./js/Eng1.0基础.js"></script> -->
+    <!-- <script src="./js/eng_0.9.4_min.js"></script>-->
+    <script src="./js/eng_1.0.0_min.js"></script>
+    <style>
+        * {
+            margin: 0 auto;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            height: 100%
+        }
+        .eng {
+            color: #f2c7b6;
+            float: right;
+            margin-right: 10px
+        }
+
+
+        .iframe {
+            float: left;
+            height:100%;
+            overflow-x: hidden;
+            position: relative
+        }
+
+        .left {
+            width: 15%;
+            background-color: #f8f9fd
+        }
+
+        .mid {
+            width: 42.5%
+        }
+
+        .right {
+            width: 42.5%;
+            height:100%;
+            border-left: 1px solid #9ea1b8;
+            color: #50f5dd
+        }
+
+        .scrollbar::-webkit-scrollbar {
+            width: 16px;
+            height: 16px;
+            background-color: rgba(0, 0, 0, 0)
+        }
+
+        .scrollbar::-webkit-scrollbar-track {
+            border-radius: 10px;
+            background-color: rgba(0, 0, 0, 0)
+        }
+
+        .scrollbar::-webkit-scrollbar-thumb {
+            width: 10px;
+            height: 20px;
+            border-radius: 10px;
+            background-color: #e5e0c3
+        }
+
+        ul {
+            list-style: none
+        }
+
+        ul li {
+            display: block
+        }
+
+        .pul {
+            margin-left: 0;
+            margin-top: 10px;
+            width: 100%;
+            user-select: none
+        }
+
+        .pul li {
+            display: block;
+            min-height: 30px;
+            cursor: pointer
+        }
+
+        .pul li span {
+            display: block;
+            width: 100%;
+            height: 30px;
+            line-height: 30px;
+            padding-left: 10%;
+            font-size: 14px
+        }
+
+        .cul {
+            width: 80%;
+            display: none
+        }
+
+        .cul li {
+            width: 100%;
+            height: 30px;
+            line-height: 30px;
+            padding-left: 8%;
+            font-size: 12px;
+            white-space: nowrap;
+            color: black;
+            cursor: pointer
+        }
+
+        textarea {
+            border: 0;
+            font-family: "微软雅黑";
+            display: block;
+            border: 10px solid rgba(0, 0, 0, 0);
+            overflow-x: hidden;
+            overflow-y: auto;
+            resize: none
+        }
+
+        .label {
+            position: absolute;
+            font-size: 12px;
+            color: #ecf9f8;
+            right: 0;
+            background-color: #555;
+            z-index: 9999
+        }
+
+        .label:nth-child(1) {
+            top: 0
+        }
+
+        .label:nth-child(2) {
+            top: 43%
+        }
+
+        .label:nth-child(3) {
+            top: 86%
+        }
+
+        .btn {
+            display: block;
+            position: absolute;
+            height: 28px;
+            width: 40px;
+            background-color: black;
+            font-size: 12px;
+            top: 86%;
+            right: 0;
+            margin-top: -28px;
+            color:white;
+            z-index: 9999;
+        }
+        #btn2{
+            display: block;
+            position: absolute;
+            height: 28px;
+            width: 40px;
+            background-color: black;
+            font-size: 12px;
+            bottom: 0;
+            right: 0;
+            color:white;
+            z-index: 9999;
+        }
+        .hinput {
+            width: 100%;
+            overflow: auto;
+            border: 10px rgba(0, 0, 0, 0) solid;
+            background-color: #272822
+        }
+
+        .hinput:nth-child(2) {
+            height:100%;
+        }
+
+
+
+        .r-r {
+            font-size: 13px;
+            width: 100%;
+            display: none
+        }
+
+        .r-r3 {
+            display: block;
+            height: 14%;
+            background: rgba(0, 0, 0, .82);
+            color: #ebeffb
+        }
+
+        .down {
+            color: #3bf563;
+            float: right;
+            margin-right: 40px
+        }
+
+        .a {
+            display: block;
+            font-size: 14px;
+            margin-left: 20px;
+            margin-top: 10px
+        }
+        #html {
+            color: #50f5dd
+        }
+
+        #html p {
+            font-size: 14px
+        }
+
+        #html .e_d {
+            margin-top: 10px
+        }
+
+        .css0 {
+            color: yellow;
+            font-style: italic
+        }
+
+        .css1 {
+            color: blue
+        }
+
+        .css2 {
+            color: red
+        }
+
+        .green {
+            color: green
+        }
+
+        .red {
+            color: red
+        }
+
+        .blue {
+            color: blue
+        }
+
+        .yellow {
+            color: yellow
+        }
+
+        .purple {
+            color: purple
+        }
+
+        .green-bg {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background-color: green
+        }
+
+        .red-bg {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background-color: red
+        }
+
+        .table {
+            text-align: center;
+            background-color: white
+        }
+
+        .max-size {
+            width: 100%;
+            height: 100%
+        }
+
+        .
+    </style>
+    
+    
+
+</head>
+<body>
+    <body style="min-width:1000px">
+        <div class="iframe scrollbar left">
+            <br><br>
+            <ul class="pul" id="$_app">
+                <li e-for="p">
+                    <span class="ppp">{{m}}</span>
+                    <ul class="cul" e-attr="style=s">
+                        <li e-for="c">{{$_value}}</li>
+                    </ul>
+                </li>
+            </ul>
+            <br>
+            <br>
+        </div>
+        <div class="iframe scrollbar mid">
+            <div class="label">Html</div>
+            <div class="label">JavaScript</div>
+            <div class="label">Console</div>
+            <button class="btn">提交</button>
+            <button id="btn2">确认</button>
+            <textarea class="r-r scrollbar r-r1" onresize=""></textarea>
+            <textarea class="r-r scrollbar r-r2"></textarea>
+            <textarea class="r-r scrollbar r-r3" placeholder="仅支持修改数据"></textarea>
+        </div>
+        <div class="iframe scrollbar right">
+            <div class="label">Output</div>
+            <div class="scrollbar hinput" id="html"></div>
+        </div>
+    </body>
+</body>
+</html>
+<script src="./js/api.js"></script>

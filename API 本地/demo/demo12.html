@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>页面b</title>
+    <script src="../js/eng_1.0.0_min.js"></script>
+    <script src="./demo.js"></script>
+</head>
+<body>
+<h2 align='center'>测试 =&gt; 和 =  页面b </h2>
+</body>
+</html>
+<script>
+var cfg={
+       app:{
+            el:document.body,
+            id:'app',
+            css:true
+       },
+       $_sharedData:{
+           '=':['app']
+       }
+};
+Eng.init(cfg);
+</script>
