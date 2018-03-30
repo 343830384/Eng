@@ -50,6 +50,8 @@
        }
    
    });
+   document.getElementById('left').offsetHeight=document.getElementById('ul').offsetHeight;
+   document.getElementById('right').offsetHeight=document.getElementById('ul').offsetHeight;
    var  h=listUl.scrollHeight;
         document.getElementById('right').style.height=h+'px';
    
@@ -57,8 +59,7 @@
         var converter = new showdown.Converter();
         var  html = converter.makeHtml(mtxt);
              document.getElementById('content').innerHTML=html;
-        //  demo-input
-        // document.getElementById('right').scrollTop=document.getElementById('left').scrollTop;
+
         new Eng({
             el:'demo-input',
             data:{
