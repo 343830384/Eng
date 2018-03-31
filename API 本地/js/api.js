@@ -1,53 +1,53 @@
 var $_eng_data = {
     "示例": {
         a: "<div id='app'><p>{{value}}</p></div>",
-        b: 'var app=new Eng({el:document.getElementById("app"),data:{value:"Hello Eng"}});"//尝试在下方控制台修改app.value的值";"//例: app.value=\'Nice to meet Eng\' 回车执行";',
+        b: 'var app=new Eng({el:"app",data:{value:"Hello Eng"}});"//尝试在下方控制台修改app.value的值";"//例: app.value=\'Nice to meet Eng\' 回车执行";',
         c: "",
         d: 1,
     },
     "e-base": {
         a: "<div id='app'><div e-base='base1'><p>{{value}}</p><div e-base='base2'><p>{{value}}</p></div></div></div>",
-        b: 'var app=new Eng({el:document.getElementById("app"),data:{base1:{value:"我是基于 base1 的value值",base2:{value:"我是基于 base2 的value值"}}}});"//尝试在下方控制台修改app的值";"//例如: app.base1.value=1234567 回车执行";',
+        b: 'var app=new Eng({el:"app",data:{base1:{value:"我是基于 base1 的value值",base2:{value:"我是基于 base2 的value值"}}}});"//尝试在下方控制台修改app的值";"//例如: app.base1.value=1234567 回车执行";',
         d: 1,
     },
     "e-attr": {
         a: "<div id='app'><div e-attr='class=v0'>txt</div><div e-attr='class=v1?(css1):(css2)'>txt</div><div e-attr='class=v2>=10?(css1):(css2)'>txt</div><div e-attr='class=v0;tittle=v3;atr=v2>=10?(css1):(css2)'> txt</div></div>",
-        b: 'var app=new Eng({el:document.getElementById("app"),data:{v0:"css0",v1:true,v2:9,v3:"this is tittle"}});',
+        b: 'var app=new Eng({el:"app",data:{v0:"css0",v1:true,v2:9,v3:"this is tittle"}});',
         d: 1,
     },
     "e-html": {
         a: "<div id='app'><div e-html='v'></div></div>",
-        b: 'var app=new Eng({el:document.getElementById("app"),data:{v:"<p>DOM 文本</p>"}});',
+        b: 'var app=new Eng({el:"app",data:{v:"<p>DOM 文本</p>"}});',
         d: 1,
     },
     "e-id": {
         a: "<div id='app'>\r<button e-id='idName' >Click me</button>\r</div>",
-        b: 'var app=new Eng({el:document.getElementById("app"),data:{},created:function(items){"//idName = idName.";items.idName.onclick=function(){alert("click me")}}});',
+        b: 'var app=new Eng({el:"app",data:{},created:function(items){"//idName = idName.";items.idName.onclick=function(){alert("click me")}}});',
         d: 1,
     },
     "e-for": {
         a: "<div id='app'><div><p e-for='for1'>index = {{$_index}}  value= {{$_value}}</p></div><br><eng><p e-for='for2'> index = {{$_index}} .... {{v}}</p></eng><br><eng><div e-for='for3'>{{v}}<div e-for='for4' style='margin-left: 30px'>{{v}}</div></div></eng></div>",
-        b: 'var app=new Eng({el:document.getElementById("app"),data:{for1:["a","b"],for2:[{v:"a"},{v:"b"},],for3:[{v:"I\'m for3 0",for4:[{v:"I\'m for4 0"},{v:"I\'m for4 1"}]},{v:"I\'m for3 1",for4:[{v:"I\'m for4 2"},{v:"I\'m for4 3"}]}]}});',
+        b: 'var app=new Eng({el:"app",data:{for1:["a","b"],for2:[{v:"a"},{v:"b"},],for3:[{v:"I\'m for3 0",for4:[{v:"I\'m for4 0"},{v:"I\'m for4 1"}]},{v:"I\'m for3 1",for4:[{v:"I\'m for4 2"},{v:"I\'m for4 3"}]}]}});',
         d: 1,
     },
     "watcher": {
         a: "<div id='app'><p>{{v1}}</p><div e-base='base'><p>{{v2}}</p></div></div>",
-        b: 'var app=new Eng({el:document.getElementById("app"),data:{v1:123,base:{v2:456}},watcher:{"v1":function(oldValue,newValue,items,cache){if(newValue==123){items.$_value="v1 的值 ,被修改了"}},"base.v2":function(oldValue,newValue,items,cache){if(newValue==456){items.$_value="base.v2 的值 ,被修改了"}}}});',
+        b: 'var app=new Eng({el:"app",data:{v1:123,base:{v2:456}},watcher:{"v1":function(oldValue,newValue,items,cache){if(newValue==123){items.$_value="v1 的值 ,被修改了"}},"base.v2":function(oldValue,newValue,items,cache){if(newValue==456){items.$_value="base.v2 的值 ,被修改了"}}}});',
         d: 1,
     },
     "watcherFor": {
         a: "<div id='app'><eng><p e-for='for1'>index = {{$_index}}   value = {{$_value}}</p></eng><br><eng><p e-for='for2'>index = {{$_index}}   value = {{v}}</p></eng></div>",
-        b: 'var app=new Eng({el:document.getElementById("app"),data:{for1:[0,1,2,3,4,5],for2:[{v:0},{v:1},{v:2},{v:3},{v:4},{v:5}]},watcherFor:{for1:function(items,cache){if(items.$_data%2==0){items.$_allow=false}},for2:function(items,cache){if(items.$_data.v%2==1){items.$_allow=false}},},created:function(items,cache){}});',
+        b: 'var app=new Eng({el:"app",data:{for1:[0,1,2,3,4,5],for2:[{v:0},{v:1},{v:2},{v:3},{v:4},{v:5}]},watcherFor:{for1:function(items,cache){if(items.$_data%2==0){items.$_allow=false}},for2:function(items,cache){if(items.$_data.v%2==1){items.$_allow=false}},},created:function(items,cache){}});',
         d: 1,
     },
     "$_watcher": {
         a: "<p id='app'>\r {{v}} \r</p>",
-        b: 'var app=new Eng({el:document.getElementById("app"),data:{v:"在下方输入 app.v=123  点第二个 提交 试试 "},created:function(items,cache){items.$_watcher({"v":function(oldValue,newValue,items,cache){if(newValue==123){items.$_value="$_watcher注册的watcher,再次修该数据时,才生效"}}})}});',
+        b: 'var app=new Eng({el:"app",data:{v:"在下方输入 app.v=123  点第二个 提交 试试 "},created:function(items,cache){items.$_watcher({"v":function(oldValue,newValue,items,cache){if(newValue==123){items.$_value="$_watcher注册的watcher,再次修该数据时,才生效"}}})}});',
         d: 1,
     },
     "$_watcherFor": {
         a: "<div id='app'><p e-for='for1'>{{$_value}}</p></div>",
-        b: 'var app=new Eng({el:document.getElementById("app"),data:{for1:[0,1,2,3,4,5,6,7,8]},created:function(items,cache){items.$_watcherFor({"for1":function(items,cache){if(items.$_data%2==1){items.$_allow=false}}})}});',
+        b: 'var app=new Eng({el:"app",data:{for1:[0,1,2,3,4,5,6,7,8]},created:function(items,cache){items.$_watcherFor({"for1":function(items,cache){if(items.$_data%2==1){items.$_allow=false}}})}});\r\r "在下方执行 app.for1=\'updata\'  试试"',
         d: 1,
     },
     "$_setToSelf": {
@@ -57,22 +57,22 @@ var $_eng_data = {
     },
     "$_setToGlobal": {
         a: "",
-        b: 'var app=new Eng({el:null,data:{},created:function(items,cache){var data={v:"$_setToGlobal不是一次性的,支持数据绑定"};var domOrStr=\'<div><p e-attr="title={{v}}"> {{v}} </p></div>\';var dom=items.$_setToGlobal({el:domOrStr,key:"base",data:data,base:"",});document.getElementById("html").appendChild(dom)}});',
+        b: 'var app=new Eng({el:null,data:{},created:function(items,cache){var data={v:"$_setToGlobal不是一次性的,支持数据绑定"};var domOrStr=\'<div><p e-attr="title={{v}}"> {{v}} </p></div>\';var dom=items.$_setToGlobal({el:domOrStr,key:"base",data:data,base:"",});document.getElementById("html").appendChild(dom)}});\r\r"在下方修改app.base.v 的值试试"',
         d: 1,
     },
     "e-input": {
         a: "<div id='app'><p>{{v}}</p>\r<input type='text' e-input='v'>\r</div>",
-        b: 'var app=new Eng({el:document.getElementById("app"),data:{v:"123"}});',
+        b: 'var app=new Eng({el:"app",data:{v:"123"}});',
         d: 1,
     },
     "e-change": {
         a: "<div id='app'><p>{{v}}</p>\r<input type='text' e-change='v'>\r</div>",
-        b: 'var app=new Eng({el:document.getElementById("app"),data:{v:"123"}});',
+        b: 'var app=new Eng({el:"app",data:{v:"123"}});',
         d: 1,
     },
     "e-event": {
         a: '<div id="app"><div style="margin:20px"><p>x = {{x}}</p><button e-event="onclick:addition1">Click x++</button></div><div e-base="base" style="margin:20px"><p>y = {{y}}</p><button e-event="onclick:addition2">Click y+=2</button></div></div>',
-        b: 'var app=new Eng({el:document.getElementById("app"),data:{x:0,base:{y:1}},event:{addition1:function(){this.$_data.x++},addition2:function(){this.$_data.y+=2}}});',
+        b: 'var app=new Eng({el:"app",data:{x:0,base:{y:1}},event:{addition1:function(){this.$_data.x++},addition2:function(){this.$_data.y+=2}}});',
         d: 1
     },
 };
