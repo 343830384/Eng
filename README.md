@@ -43,7 +43,7 @@
    * 1.0.0  
    * 1.1.0  修复数据共享 IE 下不能工作
    * 1.1.1  修复 e-event  事件对象 this.$_gData 获取错误 和 AJAX post 请求错误 
-   * 1.x.x 鉴于 watcherFor 部分人实现excel列表逻辑困难 , 1.1 版本考虑列表渲染将支持套用Excel语法
+   * 1.2.1  修复array数据错误 , 数据类型错误 以及watcher 失效的 bug
 
 
 ## License
