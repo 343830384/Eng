@@ -1,0 +1,5 @@
+需要node 环境
+
+node eng_server            启动 , 默认端口80    node eng_server 8081 更改启动端口
+
+node eng_server build    生成初级打包文件 (将 js html css 合并为js文件 ,输出到指定目录)

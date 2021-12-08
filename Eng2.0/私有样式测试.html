@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta HTTP-EQUIV="pragma" CONTENT="no-cache"> 
+  <meta HTTP-EQUIV="Cache-Control" CONTENT="no-store, must-revalidate">
+  <link rel="icon" href="data:;base64,="> 
+  <link rel="stylesheet" href='./css/base.css'>
+  <title>样式测试</title>
+  <style>
+  
+      #input[type=text][id]{
+         display:block;
+         border: 1px solid red;
+      }
+      .cs[test]{
+         position: relative;
+         margin-top:10px;
+         width:100px;
+         height:80px;
+         overflow-y: auto;
+         border:1px solid blue;
+      }
+      .cs[test] span[test]{
+         font-weight:bolder;
+         color: blueviolet;
+      }
+      .cs[test]::after{
+        /* position: absolute; */
+        display:block;
+        content:'123';
+        width:100%;
+        height:30px;
+        background-color: azure;
+      } 
+      /* .test::after{
+        position: absolute;
+        display:block;
+        content:'123';
+        width:100%;
+        height:30px;
+        bottom:-30px;
+        background-color: azure;
+      } */
+  </style>
+</head>
+<body>
+
+   <input type="text" placeholder='test' id='input'> 
+
+   <div class="cs" test>
+        <span test>12323</span>
+        <div style="height:300px;">
+
+        </div>
+   </div>
+   <div class="cs" style="width:100px;height:80px;overflow-y: auto;">
+      <span test>12323</span>
+      <div style="height:300px;">
+
+      </div>
+ </div>
+   
+   <div id='test' e-attr='class=c0'>
+      <span e-attr='class=c1'> 哈哈</span>
+      <span e-attr='class=c2'>呼呼</span>
+      <br>
+      <div class='for'>
+            <span e-for='list' e-attr='class=fc' test>
+               {{txt}}
+           </span>
+      </div>
+    </div>
+
+  
+</body>
+</html>
+<script src="./js/eng_2.0.js"></script>
+<!-- <script src="./js/eng_2.0.min.js"></script> -->
+<script>
+var css=`
+      span{
+        display: block;
+        font-size:14px;
+        font-weight:bolder;
+        margin-left:4px;
+      }
+      /* 是事实 */
+      /* 
+        123额恶趣味***   \\\   ///
+      */
+      .test{
+          position: relative;
+          width:300px;
+          height:200px;
+          margin-top:80px;
+          border:1px solid red;
+      }
+      .test::after{
+        position: absolute;
+        display:block;
+        content:'1234';
+        width:100%;
+        height:30px;
+        bottom:-30px;
+        background-color: azure;
+      }
+      .for{
+         background-color: aquamarine;
+      }
+      .for .fc:nth-child(1)[test]{
+         color:blue;
+      }
+      .fc:nth-child(2){
+         color:red;
+      }
+`; 
+
+
+
+// 原始实现####################################################################################
+
+/* 
+先删除块注释,再行注释
+
+块注释
+/\/\*[\s\S]*?\*\//g
+
+行注释
+/\/\/[\s\S]*(?=\r|\n|$)/g
+
+*/
+var reg=/\/\*[\s\S]*?\*\//g;        // 块注释  /* */
+var reg0=/\/\/[\s\S]*(?=\r|\n|$)/g; // 行注释
+var reg1=/(\{[^{}]*\})/g;           // 删除所有  {xx} 内容 
+var reg3=/\s+/g;                    // 匹配至少一个空格的情况 , 用于分割标签
+
+
+var getStyle=function(str,id){
+    str=str.replace(reg,'').replace(reg0,'');    // 去除注释
+    str=str.trim();              // 去除两侧空格
+    str=str.replace(reg3,' ');   // 去除多余空格 (大于2的空格)
+    console.log(str); 
+
+// var str1=str.replace(reg1,'_-|-_');   // 去除属性内容       
+//     console.log(str1); 
+// var arr=str1.split('_-|-_');        // 空格调整
+//     console.log(arr);
+var arr=css.split(reg1);   // 分割拼接,所有偶数位的是 id,class或tag
+var l=arr.length,i=0,v='',v2='',cv='',ar,ar2,s=0,e=0,n;
+var pj='[eng_'+id+']';
+    while(i<l){
+        v=arr[i];
+        v=v.trim();
+        if(v!==''){
+               ar=v.split(reg3);
+               e=ar.length;
+               if(e>1){
+                  v2='\r\n',s=0; 
+                  while(s<e){
+                        cv=ar[s].trim();
+                        if(cv!==''){
+                           if(s>0)v2+=' ';
+                           if(cv.search('::')<0){
+                              v2+=cv+pj;
+                           }else{
+                              ar2=cv.split('::');
+                              if(ar2.length>1){
+                                 v2+=cv.replace('::',pj) 
+                              }else{
+                                 v2+=pj+cv; 
+                              };
+                           };
+                        };
+                     s++;
+                  };
+                  v2+='\r\n';
+               }else{
+                  if(v.search('::')<0){
+                     v2='\r\n'+v+pj+'\r\n';
+                  }else{
+                     ar2=v.split('::');
+                     if(ar2.length>1){
+                           v2='\r\n'+v.replace('::',pj)+'\r\n';
+                     }else{
+                           v2='\r\n'+pj+v+'\r\n';
+                     };
+                  };
+               };
+               arr[i]=v2;
+               // console.log(str);
+        };
+        i+2;
+    };
+    console.log(str,id);
+var style=document.createElement('style');
+    style.innerText=arr.join('');
+    return style;
+};
+// var dom=getStyle(css,0)
+// document.body.appendChild(dom); 
+
+
+
+</script>
+<script>
+var log=console.log;
+
+
+var html=`
+    <div class='test' e-attr='class=c0'>
+          <span e-attr='class=c1'> 哈哈</span>
+          <span e-attr='class=c2'>呼呼</span>
+          <br>
+          <div class='for'>
+             <span e-for='list' e-attr='class=fc' test>
+                  {{txt}}
+             </span>
+          </div>
+    </div>
+`;
+
+
+var app=new Eng({
+       parent:document.body,
+      //  el:'test',
+       el:html,
+       css:css,
+       data:{
+          c0:'c0',c1:'c1',c2:'c2',
+          list:[
+              {fc:'fc',txt:'list = > 11111'},
+              {fc:'fc',txt:'list = > 22222'},
+          ]
+       }
+});
+
+
+// var app2=new Eng({
+//        parent:document.body,
+//        el:html,
+//        css:css,
+//        data:{
+//           c0:'c0',c1:'c1',c2:'c2',
+//           list:[
+//               {fc:'fc',txt:'list = > 11111'},
+//               {fc:'fc',txt:'list = > 22222'},
+//           ]
+//        }
+// });
+
+</script>
+

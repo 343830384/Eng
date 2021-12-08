@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="data:;base64,=">
+  <link rel="stylesheet" href="./css/base.css">
+  <title>Eng 单页面路由实现(范例)</title>
+</head>
+<body>
+    
+
+  
+</body>
+</html>
+<script>
+</script>
+<!-- <script src="./js_public/eng_2.0.js"></script> -->
+<script src="./js_public/eng_2.0.min.js"></script>
+<script src="./router_cfg.js"></script>
+<!-- <script src='./eng_router.js'></script> -->
+<script src="./eng_router_min.js"></script>
+<script>
+
+Router.addAreaListener({
+          name:'main',
+          evt:'open',
+          callBack:function( ){
+                console.log('aL 区域 open   area = main');
+                return true;
+          },
+});
+
+Router.addAreaListener({
+        name:'main',
+        evt:'created',
+        callBack:function( ){
+               console.log('aL 区域 created   area = main');
+        },
+});
+
+Router.addAreaListener({
+        name:'mian',
+        evt:'close',
+        callBack:function( ){
+               console.log('aL 区域 close   area = main');
+        },
+});
+
+Router.addAreaListener({
+    name:'index',
+    evt:'close',
+    callBack:function( ){
+           console.log('aL 区域 close   area = index');
+    },
+});
+
+
+
+
+</script>

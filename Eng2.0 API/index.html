@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="keywords" content="eng,engjs,engjs API,eng 官网,eng_router" />
+  <meta name=”Description” Content="EngJs API 在线使用学习手册">
+  <link rel="icon" href="./img/favicon.png"> 
+  <title>EngJs 在线API手册</title>
+  <link rel="stylesheet" href="./css/css.css">
+  <style>
+    /* 右侧块容器 */
+    .c_rq{
+       margin-top:20px;
+       width:100%;
+       height:30px;
+       overflow: hidden;
+       transition: height 0.3s;
+    }
+    /* 容器关闭 */
+    .c_close{
+       height:30px;
+    }
+    /* 分类 */
+    .c_flbt{
+
+    }
+    .c_flbt .c_bt{
+      width:300px;
+      /* padding-right:20px; */
+      margin-left:5%;
+      background-color:rgba(9,6,141,.6); 
+    }
+    .c_flbt code{
+      display:none;
+      height:0;
+    }
+    /* 右侧代码容器 */
+    code{
+       display:block;
+       width:90%;
+       padding:10px 20px;
+       font-size:13px;
+       color:#260101;
+       line-height:18px;
+       /* font-weight:bold; */
+       /* background-color:rgba(255,255,255,.8); */
+       background-color:#EBEBEB;
+       border-radius:8px;
+    }
+    /* 右侧块标题 */
+    .c_bt{
+      width:90%;
+      height:30px;
+      line-height:30px;
+      padding-left:20px;
+      color:white;
+      font-size:13px;
+      font-weight:bold;
+      border-radius:4px;
+      background-color:rgba(101,106,97,.8);
+      cursor:pointer;
+    }
+    .c_bt span{
+        float:right;
+        display:block;
+        width:fit-content;
+        height:30px;
+        line-height:30px;
+        padding:0px 10px;
+        margin-right:10px;
+        color:#B0E347;
+    }
+    /* 加重表示 */
+    .c_r{
+       color:red;
+       font-weight:bold;
+    }
+    /* ~~~~~~~~~~~~~~~  */
+    /* 左侧 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+    /* 标题 */
+    .l_bt{
+       width:100%;
+       height:30px;
+       line-height:30px;
+       font-size:13px;
+       font-weight:bold;
+       border-radius:12px;
+       padding-left:8px;
+       background-color:rgba(196,196,198,.6);
+    }
+    /* 列表值 */
+    .l_xx{
+       width:100%;
+       height:30px;
+       line-height:30px;
+       font-size:12px;
+       font-weight:bold;
+       padding-left:40px;
+       border-radius:8px;
+       color:blue;
+       /* cursor:pointer; */
+       background-color:rgba(255,255,255,.6);
+    }
+    /*   浮动 测试 框   ~~~~~~*/
+    #test{
+      position:absolute;
+      width:1024px;
+      height:800px;
+      background-color:#888889;
+      transform: translate3d(0px,0px,0);
+      box-shadow: 1px 1px 6px rgba(136,136,137,.6);
+      transition:width .1s,height .1s;
+      overflow:hidden;
+    }
+    .open{}
+    .close{
+       width:60px !important;
+       height:26px !important;
+    }
+    .d_t{
+        position:relative;
+        width:1024px;
+        height:26px;
+        background-color:#5B5B5C;
+    }
+    .d_l{
+       float: left;
+       width:16%;
+       height:100%;
+       border-radius:8px;
+       overflow-x:hidden;
+       overflow-y:auto;
+       /* background-color:rgba(0,0,0,.6); */
+       border:1px solid #D5D5D6;
+    }
+    .d_l span{
+        display:block;
+        width:100%;
+        height:20px;
+        line-height:20px;
+        margin-top:6px;
+        font-size:12px;
+        color:#F8D9FB;
+        padding-left:30%;
+        font-weight:bolder;
+        border-radius: 8px;
+        overflow:hidden;
+        white-space:nowrap;
+        text-overflow:ellipsis;
+        background-color:#02492D;
+        user-select: none;
+        cursor:pointer;
+    }
+    .d_t_m{
+        float:left;
+        width:60px;
+        height:26px;
+        line-height:26px;
+        text-align:center;
+        font-size:13px;
+        font-weight:bold;
+        color:white;
+        user-select:none;
+        cursor: pointer;
+        animation: djdh 2s linear infinite alternate-reverse;
+        /* animation-iteration-count:infinite; */
+        /* background-color:red; */
+    }
+    @keyframes djdh
+    {
+        from {color:#07FFFD;}
+        to {
+            color:#FFAB07;
+        }
+    }
+    .d_t_mv{
+        float:right;
+        width:fit-content;
+        height:26px;
+        line-height:26px;
+        text-align:center;
+        font-size:24px;
+        color:white;
+        margin-right:4px;
+        user-select:none;
+        cursor: pointer;
+    }
+    .d_k{
+        position:absolute;
+        display:block;
+        width:42%;
+        height:258px;
+        color:white;
+        font-size:12px;
+        font-weight:bold;
+        overflow-x:hidden;
+        overflow-y:auto;
+        /* background-color:rgba(0,0,0,.6); */
+        background-color:#686A68;
+        border:1px solid #D5D5D6;
+    }
+    .d_k:nth-child(3)::after{
+       display:block;
+       position:absolute;
+       content:'html模板';
+       width:fit-content;
+       font-size:12px;
+       height:20px;
+       line-height:20px;
+       padding:0px 3px;
+       transform: scale(0.8,0.8);
+       right:0;
+       top:0;
+       color:white;
+       opacity:0.6;
+       background-color:rgba(0,0,0,.6);
+       border-radius:6px;
+    }
+    .d_k:nth-child(4)::after{
+       display:block;
+       position:absolute;
+       content:'JS';
+       width:fit-content;
+       font-size:12px;
+       height:20px;
+       line-height:20px;
+       padding:0px 3px;
+       transform: scale(0.8,0.8);
+       right:0;
+       top:0;
+       color:white;
+       opacity:0.6;
+       background-color:rgba(0,0,0,.6);
+       border-radius:6px;
+    }
+    .d_k:nth-child(5)::after{
+       display:block;
+       position:absolute;
+       content:'控制台';
+       width:fit-content;
+       font-size:12px;
+       height:20px;
+       line-height:20px;
+       padding:0px 3px;
+       transform: scale(0.8,0.8);
+       right:0;
+       top:0;
+       color:white;
+       opacity:0.6;
+       background-color:rgba(0,0,0,.6);
+       border-radius:6px;
+    }
+    .d_btn{
+        position:absolute;
+        display:block;
+        font-size:12px;
+        /* color:#041CF9; */
+        padding:2px;
+        background-color:#F5F5F5;
+        border-radius:6px;
+    }
+    .d_html{
+       overflow-x:auto;
+       overflow-y:auto;
+       color:#E7E9FD;
+    }
+    .d_html *{
+       float:left;
+       width:100%;
+       min-height:20px;
+       margin-left:0;
+       padding-left:14px !important;
+    }
+    .d_html input{
+        width:50%;
+    }
+    .d_html button{
+        display:block;
+        width:fit-content;
+        text-align:center;
+        padding:0px 3px;
+    }
+    .d_html div::after{
+       display:block;
+       content:'';
+       width:100%;
+       height:6px;
+       clear: both;
+    }
+    .d_wb{
+      color:#8FA4FA;
+    }
+    .d_code{
+       color:#DFDA46;
+    }
+    .d_kzt{
+       font-size:13px;
+       color:#A1F7FF;
+    }
+    .c_b{
+      color:#3B30EF;
+      font-weight:bold;  
+    }
+    .code_c{
+       color:#610883;
+       /* font-weight:bold;    */
+    }
+    .special{
+       color:#02E833 !important; 
+    }
+    .red{
+       color:red;
+       font-weight:bold;
+    }
+    .blue{
+       color:#7979F8;
+       font-weight:bold;
+    }
+    .yellow{
+       color:#D9D904;
+       font-weight:bold;
+    }
+    .chartreuse{
+        color:chartreuse;
+    }
+  </style>
+</head>
+<body e-event='onmousemove=mMove'>
+
+ <!-- top -->
+ <div id="t_">
+      <div class="t_l">
+          <a href="https://github.com/343830384/Eng" target="_blank">github - Eng</a>
+      </div>
+      <div class="t_r">
+          <a href="./js/eng_2.0.min.js" download="eng_2.0.min.js" target="_blank"> eng2.0下载 </a>
+          <a href="./download/Router组件 & eng_server.js.7z" download="Router组件 & eng_server.js.7z" target="_blank"> Router组件 & eng_server.js 下载 </a>
+      </div>
+ </div>
+
+ <!-- left -->
+ <div id='l_'>
+        <div e-for='list_l' e-attr='class=class'>
+             {{txt}}
+        </div>
+        <!-- <div class="l_xx"> </div>   l_bt-->
+ </div> 
+
+ <!-- right -->
+ <div id='r_'>
+        <div class='c_rq' e-for='list' e-attr='class=kg'>
+                <div class='c_bt' e-event='onclick=switch'>
+                    {{bt}}
+                    <span e-event='onclick=codeTest' e-style='display=state'>
+                        点击测试
+                    </span>
+                </div>
+                <code e-html='str' class="code_c"></code>
+        </div>
+ </div>
+
+ <!-- 浮动 代码 测试框 -->
+  <div id='test' e-base='test' e-attr='class=state?open:close' e-style='transform=xy'>
+        <div class='d_t'>
+              
+              <!--开关按钮-->
+              <div class='d_t_m' e-event='onclick=switch2' title='点击开关'>
+                  点击测试
+              </div>
+              <div style="position:absolute;width:964px;height:100%;right:0;" e-event='onmousedown=mDown;onmouseup=mUp' title='按住拖动'></div>
+              <!-- 移动按钮 -->
+              <div class='d_t_mv'>✥</div>
+        </div>
+        <div class="d_l">
+             <span e-for='list2' e-event='onclick=select' e-attr='class=class'>{{txt}}</span>
+        </div>
+        
+        <!-- 左侧 -->
+        <code class='d_k d_wb' style="left:16%;top:26px;height:287px;" contenteditable=true e-html='str' e-id='wbRq'>
+                <!-- html文本 -->
+        </code>
+
+        <code class='d_k d_code ' style="left:16%;top:313px;height:287px;" contenteditable=true e-html='code' e-id='codeRq'>
+                <!--  代码文本-->
+        </code>
+        <code class='d_k d_kzt' style="left:16%;height:200px;top:600px;" contenteditable=true e-html='kzt' e-id='kzt'  e-event='onfocus:kztFocus' >
+                <!-- 输入 和  错误提示 -->
+        </code>
+        <!-- 右侧 -->
+        <div class='d_k d_html' style="left:58%;top:26px;height:573px;" e-html='html' e-id='domRq'>
+               <!-- 显示html -->
+        </div>
+        <code class='d_k' style="left:58%;height:200px;top:600px">
+               <!-- 基本提示 -->
+        </code>
+
+        <!-- 对应 按钮 -->
+        <button e-event='onclick:tj_xg' class='d_btn' style="left:558px;top:576px" title="提交修改后的 html模板 和 JS数据">修改</button>
+        <button e-event='onclick:tj_kzt' class='d_btn' style="left:558px;top:775px" title="测试修改app数据">提交</button>
+        
+  </div>
+  
+  <!-- 备案信息 -->
+  <!-- 正中 -->
+  <!-- <div style="position:absolute;width:220px;height:20px;line-height:20px;left:50%;margin-left:-110px; bottom:10px;font-size:13px;">
+     <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=50010602503003">
+         <img src="./img/bn.png" style="position:relative;top:5px">
+         <span style="margin-left:4px;">渝公网安备 50010602503003号</span>
+     </a>
+  </div> -->
+  <div style="position:absolute;width:220px;height:20px;line-height:20px;left:10px;bottom:14px;font-size:13px;">
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=50010602503003">
+        <img src="./img/bn.png" style="position:relative;top:5px">
+        <span style="margin-left:4px;">渝公网安备 50010602503003号</span>
+    </a>
+  </div>
+
+</body>
+</html>
+<!-- <script src='./js/eng_2.0.js'></script> -->
+<script>
+    if("ActiveXObject" in window){
+        document.body.innerHTML='<h1 style="width:1000px;text-align:center"> Eng 兼容到IE9 , 但是本API 网站不兼容 , 请更换其它浏览器 </h1>'
+
+        retun;
+    };
+</script>
+<script src='./js/eng_2.0.min.js'></script>
+<script src='./js/api_data.js'></script>
+<script src='./js/code_data.js'></script>
+<script>
+var log=console.log;  
+/* 
+%l注意%r
+%l = <span class="c_r">
+%r = </span>  
+
+ƒ (...)
+
+*/
+
+var app=null;
+var elDom=null; //测试代码的 el 目标
+var API=new Eng({
+      el:'API',
+      el:document.body,
+      data:{
+          //左侧条目列表
+          list_l:[
+              //   {txt:'',type:0},   // type==0?class='l_xx':'l_bt';
+              //   {txt:'',type:1},
+              {txt:'概括 :',type:1},
+              {txt:'创建属性 (Eng):',type:1},
+              {txt:'id',type:0}, 
+              {txt:'el',type:0}, 
+              {txt:'css',type:0}, 
+              {txt:'parent',type:0}, 
+              {txt:'dataOnly',type:0}, 
+              {txt:'data:{...}',type:0}, 
+              {txt:'watcher:{...}',type:0}, 
+              {txt:'watcherFor:{...}',type:0}, 
+              {txt:'domEvent:{...}',type:0}, 
+              {txt:'methods:{...}',type:0}, 
+              {txt:'timer:{...}',type:0},
+              {txt:'行内属性 (html):',type:1},
+              {txt:'e-base',type:0},
+              {txt:'e-attr',type:0},
+              {txt:'e-style',type:0},
+              {txt:'e-input',type:0}, 
+              {txt:'e-change',type:0},
+              {txt:'e-event',type:0},
+              {txt:'e-id',type:0},
+              {txt:'e-for',type:0},
+              {txt:'e-stop',type:0},
+              {txt:'获取和操作Eng实例 :',type:1},
+              {txt:'通过 Eng.get(...)',type:0},
+              {txt:'通过实例 this 操作',type:0},
+              {txt:'自定义组件封装 (范例) :',type:1},
+              {txt:'参考范例',type:0},
+              {txt:'Router组件 与 routerCfg配置 :',type:1},
+              {txt:'Router 项目结构与开发 :',type:1},
+              {txt:'Router 组件基本方法 :',type:1},
+              {txt:'该类插件的实现 :',type:1},
+              
+          ],
+          //代码测试框
+          test:{
+                state:false,  //开关显示 代码实例面板
+                x:210,y:10,
+                xy:'translate3d(0,0,0)',
+                str:'',
+                html:'',
+                code:'',
+                kzt:'',
+                list2:list2
+          },
+          //说明列表
+          list:list,    
+      },
+      watcher:{
+          //代码测试区
+          test:{
+              x:function(o,n,i){
+                 var d=i.data.test;
+                     d.xy='translate3d('+n+'px,'+d.y+'px,0)';
+              },
+              y:function(o,n,i){
+                 var d=i.data.test;
+                     d.xy='translate3d('+d.x+'px,'+n+'px,0)';
+              },
+          },
+          //
+      },
+      watcherFor:{
+           //左侧条目列表
+           list_l:function(item){
+               var fd=item.forData,u;
+                   fd.class=fd.type===0?'l_xx':'l_bt' 
+           },
+           //API 列表
+           list:function(item){
+               var fd=item.forData,dom=item.forDom,u;
+                   if(fd.str){
+                        fd.str=this.strParse(fd.str);
+                        dom.className='c_rq c_close';
+                        dom.$_close=true;
+                   }else{
+                        dom.className='c_rq c_flbt';
+                   };
+                   fd.kg=''; 
+                   if(fd.index===u)fd.state='none'; //隐藏 点击测试按钮
+
+           },
+           //test 代码测试列表
+           list2:function(item){
+               var fd=item.forData,reg=/^\e\-/;
+                   if(reg.test(fd.txt)){
+                        fd.class=''
+                   }else{
+                        fd.class='special';
+                   } 
+           },
+      },
+      domEvent:{
+            //开关折叠 API 标签
+            switch:function(item,evt){
+                var t=this,lp=t.lastP,fd=item.forData,dom=item.this,p=dom.parentNode,str=p.className,h=0;
+                   if(lp&&lp!==p&&!lp.$_close){
+                       lp.$_close=true; 
+                       lp.style.height='30px';
+                       lp.$_data.class='c_close'
+                   };
+                    if(p.$_close){//打开
+                        h=dom.nextSibling.scrollHeight;
+                        p.$_close=false;
+                        p.$_data=fd;
+                        p.style.height=h+30+'px';  //添加具体高度 , 用于触发过渡动画 
+                        fd.close='';
+                    }else{//关闭
+                        p.$_close=true;
+                        p.style.height='30px';
+                        fd.close='c_close';
+                    };
+                    //  debugger
+                    // p.className=str;
+                    t.lastP=p;
+
+            },
+            //code test######################################################################################
+            //开关显示 test 代码区域 
+            switch2:function(item,evt){
+              var t=this,d=t.$_data.test;
+                  d.state=!d.state;
+                  evt.stopPropagation();
+                  evt.preventDefault();
+            },
+            //鼠标按下
+            mDown:function(item,evt){
+              var t=this,d=t.$_data.test,cd=t.djData;
+              var x=evt.pageX,y=evt.pageY;
+                  cd.x=d.x,cd.y=d.y;
+                  cd.x2=x,cd.y2=y;
+                  cd.f=true;   
+            },
+            //鼠标移动
+            mMove:function(item,evt){
+                var t=this,d=t.$_data.test,cd=t.djData;
+                    if(cd.f){
+                        var x=evt.pageX,y=evt.pageY;
+                            x=evt.pageX-cd.x2,y=evt.pageY-cd.y2;
+                            d.x=cd.x+x,d.y=cd.y+y;
+                    };
+            },
+            //鼠标弹起
+            mUp:function(){
+                var t=this,d=t.$_data.test,cd=t.djData;
+                    cd.f=false;
+            },
+            //test选择测试指令 (代码测试区 选择左侧 指令列表 )
+            select:function(item,evt){
+                // var t=this;
+                    this.codeTest(item.index);
+            },
+            //API 列表 点击测试 
+            codeTest:function(item,evt){
+              var fd=item.forData;
+                  this.codeTest(fd.index);
+                evt.stopPropagation();
+            },
+            //提交 修改的 html 和 js
+            tj_xg:function(item,evt){
+              var t=this,d=item.data.test,doms=t.$_idDoms,ap;
+              var wb=doms.wbRq,cod=doms.codeRq,txt='';
+                   txt=wb.textContent.trim();
+                   if(txt=='')return;  //空对象
+                   //销毁旧的 APP
+                   elDom=null; 
+                   ap=Eng.get('app');
+                   if(ap)ap.destroy();
+                   ap=Eng.get(app);
+                   if(ap)ap.destroy();
+                   d.kzt='';
+                   //
+                   txt=txt.replace(/(\n|\s\s)/g,'');
+                   txt=txt.replace(/\s/g,' ');
+                   d.html='';
+                   d.html=txt;
+                   //
+                   elDom=doms.domRq.children[0];
+                   txt=cod.textContent.trim().replace(/\s/g,' ');
+                   eval(txt);
+            },
+            //提交 控制台指令
+            tj_kzt:function(item,evt){
+                 var t=this,d=item.data.test,doms=t.$_idDoms;
+                 var kzt=doms.kzt,txt='';
+                     if(!app)return; //不存在的操作实例
+                     txt=kzt.textContent.trim();
+                     kzt.innerHTML='';
+                     //捕获错误
+                     try {
+                          eval(txt);
+                     } catch (err) {
+                          kzt.innerHTML=err;
+                          kzt.style.color='#FC4E4E';
+                          kzt.err=true;
+                     };
+                     
+            },
+            //聚焦 kzt
+            kztFocus:function(item,evt){
+                 var t=this,d=item.data.test,doms=t.$_idDoms,kzt=doms.kzt;
+                     //清除并置空控制太错误信息
+                     if(kzt.err){
+                          kzt.err=false;
+                          kzt.innerHTML='';
+                          kzt.style.color='';
+                     }; 
+            },
+      }, 
+      methods:{
+            onCreated:function(){
+            var t=this,doms=t.$_idDoms,kzt=doms.kzt;;
+                    window.addEventListener('blur',function(){
+                        t.djData.f=false; // 点击失效
+                    });
+                    window.addEventListener('mouseup',function(){
+                        t.djData.f=false; // 点击失效
+                    });
+            },
+            //显示对应的 代码测试条目 
+            codeTest:function(index){
+                var t=this,gd=t.$_data,fd=gd.test.list2[index],d=gd.test,doms=t.$_idDoms,ap;
+                                    if(!fd){
+                                        console.error('没有对应的测试数据');
+                                        return;
+                                    };
+                                    d.state=true;
+                                    //销毁旧的 APP
+                                    elDom=null; 
+                                    ap=Eng.get('app');
+                                    if(ap)ap.destroy();
+                                    ap=Eng.get(app);
+                                    if(ap)ap.destroy();
+                                    //清空旧值 (防止相同值不触发)
+                                    d.html='';
+                                    d.code='';
+                                    d.str='';
+                                    d.kzt='';
+                                    //新app 执行
+                                    d.str=t.strParse(fd.html);
+                                    d.code=t.strParse(fd.code);
+                                var str=fd.html.replace(/(\n|\s\s)/g,'');
+                                    str=str.replace(/\s/g,' ');
+                                    d.html=str;
+                                    elDom=doms.domRq.children[0]; // 第一个children 
+                                    eval(fd.code.replace(/\s/g,' '));
+            },
+            //上一次的展开目标
+            lastP:null, 
+            //记录鼠标点击时相关数据 , 用于 判断 点击 或 移动
+            djData:{
+                f:false,    // 是否点击中
+                x:0,y:0,    // 点击时test位置
+                x2:0,x2:0,  // 点击时鼠标位置
+            },
+            //将特殊字符 转义
+            strParse:function(str){
+                str=str.trim();
+                str=str.replace(/\</g,'&lt;'); 
+                str=str.replace(/\>/g,'&gt;'); 
+                str=str.replace(/\n/g,'<br>');
+                str=str.replace(/\s/g,'&#8194;');  //空格 转 空白字
+                str=str.replace(/(%0)/g,'<span class="c_r">'); //红色
+                str=str.replace(/(%1)/g,'<span class="c_b">'); //蓝色    
+                str=str.replace(/(%r)/g,'</span>'); 
+              return str;
+         },
+
+      }
+});
+
+
+
+// var scroll=document.getElementById('r_');
+//     scroll.scrollTo(0,100000);
+
+
+
+
+</script>

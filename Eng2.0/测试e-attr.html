@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="data:;base64,=">
+  <link rel="stylesheet" href="./css/base.css">
+  <title>测试e-html</title>
+  <style>
+
+    h1{
+      width:fit-content;
+      display:block;
+    }
+    .html{
+      width:800px;
+      min-height:600px;
+      border:1px solid red;
+    }
+    .html *{
+       float:left;
+       width:100%;
+       min-height:20px;
+       margin-left:0;
+       padding-left:14px !important;
+    }
+    .html div::after{
+       display:block;
+       content:'';
+       width:100%;
+       height:6px;
+       clear: both;
+    }
+    .red{
+       color:red;
+       font-weight:bold;
+    }
+    .blue{
+       color:#7979F8;
+       font-weight:bold;
+    }
+    .yellow{
+       color:#D9D904;
+       font-weight:bold;
+    }
+  </style>
+</head>
+<body>
+
+<h1>测试e-html</h1>
+
+<div  class='html' id="app">
+          <div e-attr='class=class'>
+                行内属性
+          <div>
+          <div e-attr='class=class1?red:blue'>
+                行内属性
+          <div>
+          <div e-attr='class=class2>10?red:blue'>
+                行内属性
+          <div>
+          <div e-attr='class=class3==10?red:blue'>
+                行内属性
+          <div>
+</div>
+
+</body>
+</html>
+<script src='./js/eng_2.0.js'></script>
+<script>
+
+var app=new Eng({
+    el:'app',
+    id:'app',
+    data:{
+        class:'yellow',
+        class1:true,
+        class2:6,
+        class3:10,
+    },
+});
+
+
+
+
+
+
+</script>

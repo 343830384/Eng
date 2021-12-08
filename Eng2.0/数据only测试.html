@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>数据only</title>
+  <link rel="stylesheet" href="./css/base.css">
+  <style>
+      h1{
+         display:block;
+         width:fit-content;
+      }
+  </style>
+</head>
+<body>
+    <h1 id='app'></h1>
+</body>
+</html>
+<!-- <script src="./js/eng_2.0.js"></script> -->
+<script src="./js/eng_2.0.min.js"></script>
+<script>
+var log=console.log;
+
+var app=new Eng({
+    // el:'app',     // 测试 有dom 下, 无对应 For数据时, 是否报错
+     dataOnly:true,
+     data:{
+         x:123,
+         arr:[0,1,2,3,4]
+
+     },
+     watcher:{
+         x:function(o,n,i){
+            log('x = '+n);
+         }
+     },
+     watcherFor:{
+          arr:function(i){
+             log('arr   index='+i.index+'     data='+i.forData);
+          }
+         
+     },
+     methods:{
+
+     },
+     timer:{
+
+     }
+});
+
+
+
+</script>

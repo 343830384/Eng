@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="data:;base64,=">
+  <title>watcherFor中获取父元素数据</title>
+  <link rel="stylesheet" href="./css/base.css">
+  <style>
+     h1{
+      display:block;
+      width:fit-content;
+    }
+    .html{
+      width:800px;
+      min-height:600px;
+      border:1px solid red;
+    }
+     .html *{
+       float:left;
+       width:100%;
+       min-height:20px;
+       margin-left:0;
+       padding-left:14px !important;
+    }
+    .html div::after{
+       display:block;
+       content:'';
+       width:100%;
+       height:6px;
+       clear: both;
+    }
+  </style>
+</head>
+<body>
+<h1>watcherFor中获取父元素数据</h1>
+
+<div class="html" id='app'>
+      <div>{{txt}}</div>
+      <div e-for='arr0' style="color: black;">
+            <span>{{v}}</span>
+            <div e-for='arr1' style="color: blue;">
+                  <span>{{v}}</span>
+                  <div e-base='base'>
+                        <span>{{$_index}}____</span><span>{{v}}</span>
+                        <div e-for='arr2' style='color:green'>
+                            <span>{{v}}</span>
+                        </div>
+                   </div>
+
+            </div>
+
+      </div>
+      <!-- 基本数据类型 -->
+      <div>
+           <span e-for='nums'>
+             {{$_index}} --- {{$_value}}
+           </span>
+      </div>
+
+</div>
+  
+</div>
+
+
+</body>
+</html>
+<script src='./js/eng_2.0.js'></script>
+<script>
+var app= new Eng({
+      el:'app',
+      data:{
+          txt:'测试数据',
+          nums:[1,2,3,4,5,6],
+          arr0:[
+              {
+                v:'1111',
+                arr1:[
+                    {
+                        v:'2222',
+                        base:{
+                              v:'basev',
+                              arr2:[
+                                  {
+                                    v:'3333',
+                                  }
+                              ]
+                        },    
+                    },
+                ],
+              },
+          ], 
+      },
+      watcherFor:{
+           arr0:function(item){
+                 var fd=item.forData;
+           },
+           arr1:function(item){
+                 var fd=item.forData;
+           },
+           arr2:function(item){
+                 var fd=item.forData;
+                     d=item.parent(2); // 默认 1: 向上一级 ,  超出根for元素 则返回 undefined
+                     console.log(d);
+                     console.log(d.v);
+           },
+
+      }
+})
+
+
+</script>

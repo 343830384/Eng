@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/base.css">
+  <title>擦写测试</title>
+  <style>
+     .zj_lb{
+        
+        /* background-color:#C6D156; */
+        /* border:1px solid red; */
+     }
+  </style>
+</head>
+<body>
+ 
+
+
+  
+</body>
+</html>
+<script src="./js/eng_2.0.js"></script>
+<!-- <script src="./js/eng_2.0.min.js"></script> -->
+<script>
+  //<img e-attr='src=src' style='width:100%;height:100%'>
+ var html=`
+          <div class="zj_lb">
+              <div class='bt'>{{title}}</div>
+              <div class='gdt'>
+                      <div class='fdl htxt' e-event='onclick:toLeft'></div>
+                      <div class='fdl lbt'>
+                          <!-- 容器需要重新计算宽度 -->
+                          <div class='rq' e-style='width=width' e-id='gdt'>
+                                  <div class="item" e-for='list' style='margin-top:12px;border:1px solid red;'>
+                                      <div class='it'>
+                                          <span style="left:8px;">{{state}}</span> 
+                                          <span style="left:114px;">{{describe}}</span>
+                                          <span></span>
+                                      </div>
+                                      <div class="trq">
+                                          
+                                      </div>
+                                      <div class="sm">
+                                          <span>时间 : {{time}}</span>
+                                          <span>位置 : {{add}}</span>
+                                          <span>描述 : {{describe}}</span>
+                                      </div>
+                                  </div>
+                          </div>
+                      </div>
+                      <div class='fdl htxt' e-event='onclick:toRight'></div>
+              </div>
+      </div>
+`;
+var app=new Eng({
+            parent:document.body, 
+            el:html,
+            data:{
+                title:'便捷通行 | 事件列表',
+                width:'0px',
+                list:[
+                    {state:'一般',time:'2019-08-11 11:56:37',add:' 培训中心食堂W一楼',describe:'人员黑名单'},
+                    {state:'一般',time:'2019-08-11 11:56:37',add:' 培训中心食堂W一楼',describe:'人员黑名单'},
+                    {state:'一般',time:'2019-08-11 11:56:37',add:' 培训中心食堂W一楼',describe:'人员黑名单'},
+                    // {state:'一般',time:'2019-08-11 11:56:37',add:' 培训中心食堂W一楼',describe:'人员黑名单'},
+                    // {state:'一般',time:'2019-08-11 11:56:37',add:' 培训中心食堂W一楼',describe:'人员黑名单'},
+                    // {state:'一般',time:'2019-08-11 11:56:37',add:' 培训中心食堂W一楼',describe:'人员黑名单'},
+                    // {state:'一般',time:'2019-08-11 11:56:37',add:' 培训中心食堂W一楼',describe:'人员黑名单'},
+                    // {state:'一般',time:'2019-08-11 11:56:37',add:' 培训中心食堂W一楼',describe:'人员黑名单'},
+                    // {state:'一般',time:'2019-08-11 11:56:37',add:' 培训中心食堂W一楼',describe:'人员黑名单'},
+                    // {state:'一般',time:'2019-08-11 11:56:37',add:' 培训中心食堂W一楼',describe:'人员黑名单'},
+                ],
+            },
+            domEvent:{
+                toLeft:function(item){
+                    var t=this,dom=item.idDoms.gdt;
+                        t.index--;
+                        if(t.index<0)t.index=0;
+                        dom.style.left=-t.index*308+'px';
+                        //   dom.scrollTo(t.index*308,0);
+                },
+                toRight:function(item){
+                    var t=this,dom=item.idDoms.gdt;
+                        t.index++;
+                        if(t.index>=t.max)t.index=t.max-1;
+                        dom.style.left=-t.index*308+'px';
+                        //   dom.scrollTo(t.index*308,0);
+                }
+            },
+            watcher:{
+                list:function(o,n,i){
+                    // var l=n.length,d=i.data;
+                    //     d.width=308*l+8+'px';
+                    //     this.max=l;
+                        this.sizeChange();
+                }
+            },
+            watcherFor:{
+                list:function(item){
+                     if(item.index===)
+                },  
+            },
+            methods:{
+                index:0, // 滚动条位置
+                max:0,   // 滚动条最大位置 
+                onCreated:function(){
+                    //   console.log(this.$_idDoms.gdt)
+                },
+                sizeChange:function(){
+                    var d=this.$_data,list=d.list;
+                    var l=list.length;
+                        d.width=308*l+8+'px';
+                        this.max=l;
+                }
+            },
+});
+
+
+
+</script>

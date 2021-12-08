@@ -1,0 +1,19 @@
+{
+
+    //项目根路径
+    "path":"./files",
+    //区域路径列表
+    "areaPathList":{
+        /*
+           区域name =>  [开发目录 , 测试目录],
+           routerCfg 配置中 不同的 区域name 对应的文件 根路径 ,  必须先配置目录,才能正确 查找 和 build 输出文件
+           每次配置该文件,需重启服务
+
+        */
+        "public":['开发目录/public', "测试目录/public"],
+        "login":['开发目录'      ,  '测试目录'],      
+        "main" :['开发目录/main' ,  '测试目录/main'],
+        "m_r_area":['开发目录/main/m_r_area','测试目录/main/m_r_area'],
+        
+    }
+}

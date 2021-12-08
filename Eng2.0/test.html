@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>测试</title>
+  <link rel="stylesheet" href="css/base.css">
+  <style>
+     .area{
+         width:600px;
+         margin-top:20px;
+         font-size:13px;
+         padding:10px;
+         background-color:rgba(127,202,248,.8);
+         cursor:default;
+     }
+     .ys0{
+       color: blueviolet;
+     }
+     .ys1{
+       color:red;
+     }
+     .ys2{
+       color: blue;
+     }
+     .area span{
+        height:20px;
+        line-height:20px;
+        margin-left:14px;
+     }
+     .qd{
+       color:#8E0095;
+       font-weight:bolder;
+     }
+     .qd::after{
+       content:'';
+       display: block;
+       width:100%;
+       height:6px;
+     }
+     .fl{
+        margin-top:14px;
+        width:100%;
+        padding-top:10px;
+        padding-bottom:10px;
+        border:1px solid #FBCAC5;
+     }
+     button{
+       margin-left:14px;
+       padding-left:5px;
+       padding-right:5px;
+     }
+  </style>
+</head>
+<body>
+      <div></div>
+      <div class="area" id='app'>
+              <div  e-attr='title=title'> {title} => {{title}} </div>
+              
+              <div class='fl' e-base='watch'>
+                    测试 watcher 值 响应  => 
+					<br>
+					e-change <input type="text" e-change='v'> 
+					<br>
+					e-input <input type="text" e-input='v'>
+              </div>
+
+              <div class='fl'>
+                      <span class='qd'> e-attr  class =></span> 
+                      <br>
+                      <span e-attr='class=class'>颜色 class=ys2</span> 
+                      <span e-attr='class=num>10?ys1:ys2'>颜色 class=num>10?ys1:ys2</span>
+                      <span e-attr='class=num>10?ys2:ys1'>颜色 class=num>10?ys2:ys1</span>
+              </div>
+
+              <div class='fl'>
+                      <span class='qd'> e-style 注意是驼峰式写法 例: backgroundColor 非:background-color</span>
+                      <br>
+                      <div style="width:fit-content;height:20px;background-color: bisque;" e-style='backgroundColor=bg'>
+                            修改宽高   e-style='backgroundColor=bg'   可 attr=xx;attr2=xxxx 多个属性
+                      </div>
+              </div>
+
+              <div class='fl'>
+                      <span class='qd'> e-event =  '原生方法:domEvent内事件名;第二个'</span> 
+                      <br>
+                      <button e-event='onclick=click;ondblclick=dblclick'>
+                          点我 正常domEvent   console.log( 点我)    //item, evt
+                      </button >
+              </div>
+
+              <div class='fl' e-base='base1'>
+                        <span class='qd'> e-base='baseName' 数据作用域 ,</span>
+                        <br>
+                        <span> e-base = xxx 或 xxxx.xxxx</span>
+                        <br>
+                        <span> 注意 e-base 在数组循环中的根域 是被循环根元素本身 </span>
+                        <div>
+                            <span>v1= {{v1}}</span>
+                            <span>向下base2.v2 = {{base2.v2}}</span>
+                            <div e-base='base2'>
+                                <span>base2.v2= {{v2}}</span>
+                                <span>$_parent.v2= {{$_parent.v2}}</span>
+                            </div>
+                        </div>
+              </div>
+
+              <div class='fl'>
+                        <span class='qd'> e-for='forIdName'  for循环 ,for循环相对于父元素添加,会被作为父元素的末尾元素添加 (所以注意e-for的相对位置) </span>
+                        <span class='qd'> e-for 下 e-base 的作用域 才能向上 $_parent.xxx 取值, 否则会报错 </span>
+                        <div e-for='for1'>
+                              <span> for1 循环  index={{$_index}}  txt:'{{txt}}'</span>
+                              <div e-for='for2' style="margin-left:30px;">
+                                    <span> for2 循环  index={{$_index}}  txt:'{{txt}}'</span>
+                                    <br>
+                                    <button e-event='onclick:forDomClick'> 点击我 </button>
+                                    <br>
+                                    <div style=" margin-left:30px;" e-base='baseF'>
+                                            <span>baseF 下的  txt=> {{txt}} </span>
+                                            <br>
+                                            <span>baseF 下的  $_parent.txt=> {{ $_parent.txt}} </span>
+                                            <br>
+                                            <button e-event='onclick:forDomClick'>点击我</button>
+                                    </div>
+                              </div>
+                        </div>
+              </div>
+              
+              <div class='fl'>
+                  <div e-base='baseJson'>
+                        <div>{{txt}}</div>
+                        <div>
+                              <div e-for='bFor0'>value == {{$_value}} </div>
+                        </div>
+                  </div>
+                  
+              </div>
+      </div>  
+</body>
+</html>
+<script src="./js/eng_2.0.js"></script>
+<!-- <script src="./js/eng_2.0.min.js"></script> -->
+<script>
+var body=document.body;
+
+// e-stop 阻止向下 遍历 dom   (1:可以提高性能 , 可以一个父容器内 绑定多个app)
+// ['e-id','e-attr','e-style','e-event','e-input','e-change','e-html']
+// e-for  ,   e-base  ,
+// 新增 e-attr 支持  checked 这种对象属性赋值  input.checked=xxxx  这种
+
+var app=new Eng({
+      id:'app',
+      el:'app',
+      //parent:'',   // parentDomNode      
+      css:'',         // css 样式数据 (APP专属作用域)
+      dataOnly:false, // 默认false   ( 仅做数据响应 ,不处理 dom  )
+      data:{
+          title:' 测试title 包含鼠标悬浮提示 ',
+          watch:{
+             v:9
+          },
+          class:'ys0',
+          num:10,
+          bg:'#F2F6C7',
+          base1:{
+              v1:'v1>>111 ',
+              v2:'haha',
+              base2:{
+                v1:'huhu',
+                v2:'v2>222'
+              }
+          },
+          for1:[
+              {
+                txt:'hahaha',
+                  for2:[
+                      {
+                        txt:'huhu',
+                        baseF:{
+                            txt:'bf_ 12123'
+                        }
+                      }
+                  ]
+              }
+          ],
+          baseJson:{
+              txt:'测试 json 下的 array',
+              bFor0:[0,1,2,3]
+          }
+      },
+      watcher:{
+           title:function(oldV,newV,item){
+               /* 
+                item={
+                      data: {...}
+                      el: domNode
+                      id: xxxx
+                      idDoms: {xxx}
+                      methods:{...}
+                };
+               */
+              //  return  返回要修改的值
+           },
+           watch:{
+              v:function(o,n,i){
+                  // console.log(o,n);
+                  //if(n<0)return 0;
+                  //if(n>9)return 9; 
+              },
+           },
+           //支持这种写法
+           'base1.base2':{
+                 v1:function(o,n,i){
+
+                 },
+                 v2:function(o,n,i){
+                      // console.log(n)
+                 }
+           }
+      },
+      watcherFor:{
+            for1:function(item){
+              /* 
+                item={
+                    addWatcher: ƒ (e)     //基于当前for循环前置数据路径, 注册watcher方法 (当单独修改数据时)
+                    parent: f(deep)       //用于循环嵌套时的子循环向上查找父循环元素数据, 默认deep=1, 当父循环不存在时 返回 undefined
+                    data: {…}             //全局数据 
+                    forData: {txt: "hahaha", for2: Array(1)}  //被循环元素
+                    forDataAll: [{…}]                         //被循环数组
+                    forDom: div                               //循环创建的dom节点 
+                    id: "app"                                 //
+                    index: 0,                                 //被循环元素的index 
+                    pos:[]                                    //从根循环到子循环的index路径 ,  如果当前元素的index=2 ,父循环元素的index=1 , 则此时 pos=[1,2] 
+                }
+              */
+            }
+      },
+      domEvent:{
+          //普通domEvent (非 for循环内的时间)
+          click:function(item,evt){
+              /* item={
+                  data: {}
+                  idDoms: {}   //e-id 储存的dom
+                  methods: {$_el: div#app.area, $_idDoms: {…}, $_id: undefined, $_sleep: ƒ, $_awake: ƒ, …}
+                  this:dom  ,  //当前dom 节点
+                  baseData: ,  //当前base 作用域数据 
+                  this:eventDomNode
+              };
+              evt = domEvent
+              this = methods
+              */
+              console.log('点我 = 普通dom 事件 单击');
+          },
+          dblclick:function(item,evt){
+              console.log('点我 = 普通dom 事件 双击');
+          },
+          forDomClick:function(item,evt){
+              /* 
+                 item={
+                    data: {…}
+                    idDoms: {}
+                    forData: {}
+                    forDataAll: [(...)]
+                    index: 0
+                    methods: {$_el: div#app.area, $_idDoms: {…}, onCreated: ƒ, time1: ƒ, time2: ƒ, …}
+                    pos: (2) [0, 0],   //循环位置 ,长度意味着多层嵌套循环
+                    parent: ƒ(deep)    //用于循环嵌套时的子循环向上查找父循环元素数据, 默认deep=1, 当父循环不存在时 返回 undefined 
+                    this:eventDomNode      
+                 }
+                 evt = domEvent
+                 this = methods
+              */
+              console.log('点我 = for循环内 dom 事件');
+          }
+      },
+      methods:{
+            onInit:function(v,v2){
+               if(v)console.log('init   testStr=> '+v+'    '+v2);
+            },
+            onCreated:function(){
+                  console.log(this);
+                  /* 
+                    $_el: domNode           // app  domNode
+                    $_id: xxx               // app  id
+                    $_idDoms: { ... }       // 储存 所有 e-id 的dom节点 
+                    $_state:  "active"      // app 实例状态  active:在页面显示 ; sleep:内存中不在页面 , die:销毁
+                    $_data:   { ... }       // app Data
+                    $_awake:   ƒ            // 自唤醒时调用 ,备用不推荐, 通常使用 Eng.get('appId').awake()的方式
+                    $_sleep:   ƒ            // 自休眠 ,  所有timer相关方法暂停执行    
+                    $_destroy: ƒ            // 自销毁   
+                  */
+            },
+            onSleep:function(v){
+                  if(v)console.log('sleep   testStr=> '+v);
+            },
+            onAwake:function(v){
+                  if(v)console.log('awake   testStr=> '+v);
+            },
+            onDestroy:function(v){
+                  if(v)console.log('destroy   testStr=> '+v);
+            },
+            time1:function(){
+                    console.log('time1');
+                    // return true; //手动触发停用 (永久删除该执行方法)
+            },
+            count:0,
+            time2:function(){
+              var t=this;
+                  if(t.count>3)return true;
+                  console.log('time2');
+                  t.count++;
+                  
+
+            },
+      },
+      //定时器  方法名 同 methods 内的   (每次 sleep 后awake 唤醒, 都会重新触发已暂停的 timer 事件执行, 需做好判断, sleep实例在内存中,并未销毁 )
+      timer:{
+          time1:{
+                type:'time' ,   // 按时间执行
+                time:3000,      // 间隔
+                loop:true,      // true:  循环调用 , false:延迟 
+          },
+          time2:{
+                type:'fps' ,     //每帧执行
+                fps:120,          //多少帧调用一次 , 默认1
+          }   
+     }
+}, 'init','haha');
+// 获取 app 操控方法
+var appFun=Eng.get('app');   //appIdName 或 appData
+/* 
+      awake: ƒ ()       //  唤醒  (parentDom , args0,args1,....)  //唤醒位置 (基于父dom 或 domID获取  )
+      data: {…}         //  引用对象赋值
+      destroy: ƒ ()     //  销毁  (args)
+      el: ,             //  elDom   
+      methods: {…}      //  methods
+      setData: ƒ (data) //  全新完整赋值
+      sleep: ƒ ()       //  休眠 (args.....)
+      state: '' ,       //  状态 active , sleep, die,
+*/
+
+
+</script>

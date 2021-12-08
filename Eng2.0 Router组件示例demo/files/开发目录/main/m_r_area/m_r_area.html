@@ -1,0 +1,46 @@
+<style>
+h2{
+  margin-top:10px;
+  width:400px;
+  text-align:center;
+}
+code{
+   display: block;
+   position:relative;
+   margin-top:20px;
+   width:800px;
+   min-height:600px;
+   border-radius:10px;
+   padding-top:1px;
+   font-size:18px;
+   background-color: rgb(189, 240, 189);
+}
+</style>
+
+<html>
+
+<div>
+   <h2>m_r_area (子区域组件)</h1>
+   <code e-html=code contenteditable="true" e-html=code ></code>
+
+
+</div>
+
+
+</html>
+
+<script>
+var str='<div style="background-color: rgb(189, 240, 189); font-family: Consolas, &quot;Courier New&quot;, monospace; font-weight: bold; font-size: 14px; line-height: 19px; white-space: pre;"><div style="line-height: 19px;"><div style="line-height: 19px;"><div style="line-height: 19px;"><div><span style="color: rgb(0, 128, 0);"><br></span></div><div><span style="color: rgb(0, 128, 0);">// 逻辑结构 json 图</span>    <span style="color: rgb(163, 21, 21);">✔ :打开显示中  </span><span style="color: rgb(163, 21, 21);">✖:关闭中     (注:初次打开时的状态)</span></div><div><br></div><div><div style="line-height: 19px;"><div>{</div><br><div>&nbsp; &nbsp;<span style="color: #008000;">//关闭</span></div><div>&nbsp; &nbsp;login:<span style="color: #a31515;">"{....}"</span>,</div><br><div>&nbsp; &nbsp;<span style="color: #008000;">//打开</span></div><div>&nbsp; &nbsp;main:{</div><div><br></div><div>&nbsp; &nbsp; &nbsp; &nbsp;<span style="color: #008000;">//互斥</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp;left:{</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; main_left1 &nbsp;: <span style="color: #a31515;">"</span><span style="color: rgb(163, 21, 21);">✖</span><span style="color: #a31515;">"</span>, </div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; main_left2 &nbsp;: <span style="color: #a31515;">"✖"</span> ,</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; main_left3 &nbsp;: <span style="color: #a31515;">"</span><span style="color: rgb(163, 21, 21);">✔</span><span style="color: rgb(163, 21, 21);">"</span> ,</div><div>&nbsp; &nbsp; &nbsp; &nbsp;},</div><div><br></div><div>&nbsp; &nbsp; &nbsp; &nbsp;<span style="color: #008000;">//互斥</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp;right:{</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; main_right1 : <span style="color: #a31515;">"</span><span style="color: rgb(163, 21, 21);">✖</span><span style="color: #a31515;">"</span> , &nbsp;</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; main_right2 : <span style="color: #a31515;">"✖"</span> ,</div><div>&nbsp; &nbsp; &nbsp; &nbsp;},</div><div><br></div><div>&nbsp; &nbsp; &nbsp; &nbsp;<span style="color: #008000;">//子区域</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp;childAreaes:{</div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #008000;">//特殊的子区域组件 , (当前)</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; m_r_area:<span style="color: #a31515;">"</span><span style="color: rgb(163, 21, 21);">✔</span><span style="color: rgb(163, 21, 21);">"</span>, &nbsp; &nbsp; <span style="color: rgb(0, 128, 0);">//因设置添加到 main.right , 所以设置为与 main.right的私有组件互斥 (参看配置)</span></div><div>&nbsp; &nbsp; &nbsp; &nbsp;}</div><div>&nbsp; &nbsp;}</div><div>}</div></div></div></div></div></div></div>';
+
+var app=new Eng({
+      id:'m_r_area',
+      el:html,
+      parent:parentDom,
+      css:css,
+      data:{
+          code:str
+      }
+});
+
+
+</script>

@@ -1,0 +1,91 @@
+*{
+  margin:0 auto;
+  padding:0;
+  box-sizing: border-box;
+  /* color:#4F024E; */
+  /* background-color: #f8f9fd; */
+  }
+  html,body{
+    position:relative;	
+    width:100%;
+    height:100%;
+    min-width:1600px;
+    min-height:1080px;
+    overflow:hidden;
+    /* background-color:skyblue; */
+    background: linear-gradient(skyblue,skyblue,skyblue,skyblue,khaki);
+  }
+  /* 定义滚动条宽度 */
+  ::-webkit-scrollbar {
+    width:4px;
+    height:4px;
+  }
+  /*定义滚动条  轨道背景色+圆角*/
+  ::-webkit-scrollbar-track {
+    border-radius: 2px;
+    background-color:#C3C4C3;
+  }
+
+  /*定义滚动条  滑块背景色+圆角*/
+  ::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    background-color:#555;
+  }
+  /* top */
+  #t_{
+    position:relative;
+    width:100%;
+    height:40px;
+    line-height:40px;
+    background-color:rgba(207,235,247,.8);
+  }
+  #t_ a{
+    float:left;
+    display:inline-block;
+    width:fit-content;
+    height:20px;
+    line-height:20px;
+  }
+  #t_ .t_l{
+     float:left;
+     width:fit-content;
+     height:20px;
+     margin-top:10px;
+     font-weight:bolder;
+     color:#CB04C5 !important;
+  }
+  #t_ .t_r{
+    float:right;
+    width:fit-content;
+    height:20px;
+    margin-top:10px;
+    margin-right:100px;
+ }
+ .t_l a{
+    margin-left:40px;
+ }
+ .t_r a{
+    margin-right:40px;
+ }
+  /* left */
+  #l_{
+    position:relative;
+    float:left;
+    width:200px;
+    height:90%;
+    overflow-x:hidden;
+    overflow-y:auto;
+    cursor: default;
+    /* border:1px solid red; */
+  }
+  /* right */
+  #r_{
+    position:relative;
+    float:right;
+    width:calc(100% - 200px);
+    height:100%;
+    overflow-x:hidden;
+    overflow-y:auto;
+    padding-bottom:400px;
+    border:1px solid rgb(238, 236, 236);
+  }
