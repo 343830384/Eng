@@ -1,7 +1,6 @@
 /* 
-继承 Eng js 1.2  大多数写法 
-的重写版本 
-支持  xxx.xxx.   $parent.xxx.xx 重写的方法 
+备注 :   命名简短随意 (受不了长串字符) , 中文备注详尽 , 不习惯自行替换   
+
 
 uglifyjs eng_2.0.js -m -c -o eng_2.0.min.js   //压缩 =>   混淆,压缩,输出
 */
@@ -2173,18 +2172,21 @@ Eng.prototype.extraInit=function(){
          * dom :   添加入指定的dom
          */
         t.onAwake=function(dom,args){
-             if(arr.length===0)t.timerInit();
-             var l=arr.length,d;
-                 while(l--){
-                    d=arr[l];
-                    if(d[0]===0){//重置时间
-                         d[3]=getTime();
-                    }else{       //重置初始帧
-                         d[2]=0;
-                    };  
-                    timeArr.push(arr[l])
-                 };
-                 if(t.css)bod.appendChild(t.css); //添加 样式 dom
+             var f=$f.$_state==='active'?false:true;  //当前是否激活状态
+                 if(f){//防止无意义，反复触发定时器初始化
+                         if(arr.length===0)t.timerInit(); //检查是否有定时器
+                         var l=arr.length,d;
+                              while(l--){
+                                   d=arr[l];
+                                   if(d[0]===0){//重置时间
+                                        d[3]=getTime();
+                                   }else{       //重置初始帧
+                                        d[2]=0;
+                                   };  
+                                   timeArr.push(arr[l])
+                              };
+                              if(t.css)bod.appendChild(t.css); //添加 样式 dom
+                 };  
                  if(dom){
                       dom.appendChild(t.el);
                  }else if(pDom!==null&&t.el.parentNode===null){ //初始旧位置添加 
