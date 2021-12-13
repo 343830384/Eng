@@ -61,7 +61,7 @@
 <div align=center><img width="800" src="https://s4.ax1x.com/2021/12/13/oOQVoD.png"/></div>
 <br>
 
-#### 得出如Router组件的设计结构 （参考范式）
+#### 得出如下 Router组件 的设计结构 （参考范式）
 <div align=center><img width="800" src="https://s4.ax1x.com/2021/12/13/oOQAeK.png"/></div>
 <br>
 

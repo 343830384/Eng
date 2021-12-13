@@ -7,6 +7,10 @@
 
 %r = </span>               // 结尾
 
+img(./xx.png)img   <img class='img' src='./xx.png'>
+
+img()img
+
 ƒ (...)
 
 //
@@ -31,43 +35,89 @@ bt:'概括',
    
 //概述    
 {
-bt:'特点',
+bt:'概述',
 str:`
->  Eng 是一款 MVVM 模式超 轻量级的 组件化数据渲染 JS 插件 ,是 React 、 Vue 、 Angular 全家桶套工具外另一种更轻量级的 纯插件 实现方式 ， 具有所有此类工具中 ， 最少 最简洁 最易的 学习曲线;
+●  Eng 是一款 MVVM 模式超 轻量级的 组件化数据渲染 JS 插件 ,是 React 、 Vue 、 Angular 全家桶套工具外另一种更轻量级的 纯插件 实现方式 ， 具有所有此类工具中 ， 最少 最简洁 最易的 学习曲线;
 
->  轻量: Eng + Router组件 + eng_server.js(单文件)  min版总共不超过 40KB 
+●  轻量: Eng + Router组件 + eng_server.js(单文件) min版总共不超过 40KB
 
->  精简: 仅10个行内指令 +  5个基本区域方法 +  基本对象操作方法 ,  即可完成所有组件化数据渲染   (对Eng 1.0 大副删减)
+●  精简: 仅10个行内指令 + 5个基本区域方法 + 基本对象操作方法 , 即可完成所有组件化数据渲染 (对Eng 1.0 大副删减)
 
->  与原生 JS 紧密契合 , 不在原生JS 基础上 二次创造发明创造 新名词 新概念 , 基础知识复用,  类似JQuery 仅是插件, 提供基础便利 , 不凌驾代替套壳原生JavaScript
+●  与原生 JS 紧密契合 , 不在原生JS 基础上 二次发明创造 新名词 新概念 , 基础知识复用, 类似JQuery 仅是插件 , 提供基础便利 , 不凌驾代替套壳原生JavaScript
 
->  Eng 和 路由插件 向下兼容到 IE9
+●  Eng 和 Router组件 向下兼容到 IE9
 
->  可与其它插件组件库混用 ,  如vue(需 理解 vue的v-pre 和 Eng的e-stop 知识点) ,  注意其它组/插件的销毁方法!
+●  可与其它插件组件库混用 , 如vue(需 理解 vue的v-pre 和 Eng的e-stop 知识点) , 注意其它组/插件的销毁方法!
 
->  支持 单页面路由! 提供一个基于Eng 的组件化的路由插件 , 配套基本后端服务 , 路由配置浅显易懂 (一目了然) , 无其它插件额外学习成本, 二次开发会调接口即可 (灵活自定义修改)  
+●  支持 单页面路由! 提供一个基于Eng 的组件化的路由插件 , 配套基本后端服务 , 路由配置浅显易懂 (一目了然) , 无其它插件额外学习成本, 二次开发会调接口即可 (灵活自定义修改)
 
->  不提供全家桶! Eng只是灵活的纯插件 , 满足基本需求 , 不参与 , 不谋求 制定行业  %0 代号-35 流水线工业标准%r
+●  Eng 的数据结构与dom层次划分， 互为结构视图 。 在深度开发下 ，提供异常明晰的规律逻辑思考模式 与 例推效应；
+
+●  不提供全家桶! Eng只是灵活的纯插件 , 满足基本需求 , 仅规定了基于 Router组件和eng_server.js的基本范式 (可自行修改), 在此基础上二次自由开发
 
 `,
 },
 
-//开发思想
+//开发原因
 {
-bt:'开发思想',    
+bt:'开发原因',    
 str:`
-%1
+●  主流前端的数据渲染和交互开发 以 vue 和 react 生态圈为主 ， 做为与后端紧密配合 ， 提供大量现成可用组件 ， 快速迭代产品的前后端工具， 其有着优渥的便捷性 ， 在这点上必须予以肯定。
 
->  Eng 以对 基本原生JS知识点的运用  和 宏观思路整体架构 为基础开发 , 尽可能的精简 无意义 或 没必要(使用量少, 又可自行实现)的冗余.
+●  但对于纯粹的基础前端开发而言 ， 此二者的生态圈过于繁杂 ， 大量冗余累赘不可抛弃的历史包袱， 以及对原生JS和web环境破坏严重 。 大量凌驾僭越于原生web 环境的规则束缚，魔法字符串 ， 新规则 ， 新概念 ， 会造成不同程度的束缚和掣肘。
 
->  Eng 的开发哲学基础 :  一生二 , 二生三 , 三生万物(全家桶)  , 学 "三+" 不学万物 (侧重对通用基础知识点的运用 )!! 
-   
->  因此 Eng 可能不适合 严重依赖全家桶.....! 
+●  且对基于两者的新手开发 ， 为了便捷而便捷 ， 大量引用三方甚至多个重量级插件， 不仅会造成项目臃肿烦杂， 并因过份远离基础， 离开其生态圈则丧失基础开发能力。
 
-%r
+●  因此 ，EngJS与原生 JS 紧密契合 , 不在原生JS 基础上 二次发明创造 新名词 新概念 , 基础知识复用。  类似JQuery 仅是插件 ,  提供基础便利 , 不凌驾代替套壳原生JavaScript，仅提供基础的 数据渲染和组件支持 ，精简易用 （对于基础开发而言），且能与现有生态的混合使用。
 `
 },
+//设计思想
+{
+bt:'设计思想',    
+str:`
+●  强调数据视图结构 ， web端大量涉及视觉结构的数据逻辑和交互呈现，  因此Eng 的数据结构与dom层次划分， 互为结构视图 。 在深度开发下 ，提供异常明晰的规律逻辑思考模式 与 例推效应。（参图）。 Router组件，也是基于此结构逻辑实现， 一脉相承， 
 
+img(https://s4.ax1x.com/2021/12/13/oOQEdO.png)img
+`
+},
+//数据渲染 与 交互功能 开发
+{
+bt:'数据渲染 与 交互功能 开发',    
+str:`
+●  精简: 仅10个行内指令 +  5个基本区域方法 +  基本组件对象操作方法 ,  即可完成所有组件化数据渲染   (参下案例)  
+●  组件对象特点 ，灵活易用，仅 destroy，sleep，awake 三个基本状态，就可实现在页面的销毁，隐藏，以及位置变换。
+
+例1：图表类， echarts折线图等理论上基于此也较容易实现
+img(https://s4.ax1x.com/2021/12/13/oOmm7Q.png)img
+
+例2：css3 3D盒模型城市场景编辑器
+img(https://s4.ax1x.com/2021/12/13/oOmKts.png)img
+
+例3：canvas2d 的骨骼动画编辑器
+img(https://s4.ax1x.com/2021/12/13/oOme0g.png)img
+
+例4：canvas2d 地图场景编辑器
+img(https://s4.ax1x.com/2021/12/13/oOmukj.png)img
+
+●  综上旨在证明，Eng具备同类工具的 核心基础开发能力，而非泛泛……
+`
+},
+//Router组件
+{
+bt:'Router组件',    
+str:`
+●  基于如下常见页面结构，使用JSON结构表述不同组件的关系
+●  以区域area划分功能不同的单页面  （参下图）
+●  对于简单页面不建议使用，完全没必要
+●  对于特殊需求，因Eng组件的灵活易用性， 可尝试自行实现并构建基于项目规则需求的Router组件 
+
+img(https://s4.ax1x.com/2021/12/13/oOQVoD.png)img
+
+得出如下 Router组件 的设计结构 （参考范式)
+
+img(https://s4.ax1x.com/2021/12/13/oOQAeK.md.png)img
+`
+},
 //创建属性 ############################################################################################
 //分割
 {
@@ -108,7 +158,7 @@ var appData=new Eng({
 {
 bt:'id',
 str:`
-%1> string : 唯一 , 用于标记获取 Eng实例 对象  ;   通过Eng.get( appId || appData ) 的方式
+%1●  string : 唯一 , 用于标记获取 Eng实例 对象  ;   通过Eng.get( appId || appData ) 的方式
 %r
 ~
 `,
@@ -117,8 +167,8 @@ str:`
 {
 bt:'el',
 str:`
-%1> domID , domNode 或  html文本 , 后者多用于 封装组件
-> %0注意%r: html文本  根节点必须是唯一且闭合的
+%1●  domID , domNode 或  html文本 , 后者多用于 封装组件
+●  %0注意%r: html文本  根节点必须是唯一且闭合的
 %r
 ~
 `,
@@ -127,7 +177,7 @@ str:`
 {
 bt:'css',
 str:`
-%1> 当前APP实例的 专属作用域css样式文本  ==== <style>标签内容 , 多用于封装组件 ,避免样式污染
+%1●  当前APP实例的 专属作用域css样式文本  ==== <style>标签内容 , 多用于封装组件 ,避免样式污染
 %r
 `,
 },
@@ -135,7 +185,7 @@ str:`
 {
 bt:'parent',
 str:`
-%1> domId 或 domNode : app实例 el 节点 的 父容器,  多用于封装组件的, 显示在页面的指定位置(基于父元素)
+%1●  domId 或 domNode : app实例 el 节点 的 父容器,  多用于封装组件的, 显示在页面的指定位置(基于父元素)
 %r
 `,
 },
@@ -143,8 +193,8 @@ str:`
 {
 bt:'dataOnly',
 str:`
-%1> 默认false: 当为true时 , 仅对纯数据响应, 不再处理el 节点  
-> 这里推荐 作为 router 路由使用, 在Eng中 路由的实现 , 操作成本及其简单 ,  仅作为实现思路范例提供 
+%1●  默认false: 当为true时 , 仅对纯数据响应, 不再处理el 节点  
+●  这里推荐 作为 router 路由使用, 在Eng中 路由的实现 , 操作成本及其简单 ,  仅作为实现思路范例提供 
 %r
 ~
 `,
@@ -163,7 +213,8 @@ str:`
 bt:'watcher : {...}',
 index:10,
 str:`
-%1注册观察 指定数据 的变化 , 并进行相应处理
+%1
+●  注册观察 指定数据 的变化 , 并进行相应处理
 示例:
 %r
 appData=new Eng({
@@ -207,9 +258,10 @@ appData=new Eng({
 bt:'wactherFor : {...}',
 index:11,
 str:`
-%1> 用于处理每一个被循环的子元素数据 (当数组发生变化时)
-> %0注意%r 被循环数据的 键 命名 在 appData 中具有唯一性 (相同命名时 , 仅处理逻辑顺序的最后一个)
-> %0注意%r watcherFor 中可以 向被循环元素数据 写入其它字段数据, 方便逻辑运算 , 以%0$_%r开头的key可避免被复制,污染数据 
+%1
+●  用于处理每一个被循环的子元素数据 (当数组发生变化时)
+●  %0注意%r 被循环数据的 键 命名 在 appData 中具有唯一性 (相同命名时 , 仅处理逻辑顺序的最后一个)
+●  %0注意%r watcherFor 中可以 向被循环元素数据 写入其它字段数据, 方便逻辑运算 , 以%0$_%r开头的key可避免被复制,污染数据 
 示例:
 %r
 html='
@@ -255,8 +307,9 @@ appData=new Eng({
 {
 bt:'domEvent : {...}',
 str:`
-%1注册对应dom的事件方法
-%0注意%r  e-event='onclick=click' 等价于 domNode.onclick=click(){...}  === 与 原生js 节点事件绑定方式 完全一致
+%1
+●  注册对应dom的事件方法
+●  %0注意%r  e-event='onclick=click' 等价于 domNode.onclick=click(){...}  === 与 原生js 节点事件绑定方式 完全一致
 示例:
 %r
 html='
@@ -291,7 +344,8 @@ appData=new Eng({
 {
 bt:'methods : {...}',
 str:`
-%1自定义(包含默认)属性方法域 , 实例中所有this均指向 methods
+%1
+●  自定义(包含默认)属性方法域 , 实例中所有this均指向 methods
 实例:
 %r
 new Eng({
@@ -323,8 +377,8 @@ bt:'timer : {...}',
 str:`
 %1timer
 
-> 用于 延迟或循环 计时 
-> 示例:
+●  用于 延迟或循环 计时 
+●  示例:
 %r
 appData=new Eng({
   ...
@@ -357,7 +411,6 @@ appData=new Eng({
 },
 
 //行内属性 #############################################################################################
-//分割
 {
   bt:'行内属性/参数 <div  ....  >/div>',
 },
@@ -366,14 +419,15 @@ appData=new Eng({
 bt:'e-base',
 index:0,
 str:`
-%1e-base='xxx' 当前数据的作用域 
+%1
+☆  e-base='xxx' 当前数据的作用域 
 %r
 html='
   <div id='app'>
         <div>{{v0}}</div>
         <div e-base='base1'>
               <span>{{v0}}</span><br>
-              <span>{{$_parent.v0}}</span>    //或者 $_p.v0  访问上级json域
+              <span>{{$_parent.v0}}</span>             //或者 $_p.v0  访问上级json域
         </div>
         <div e-base='base2.base3'>
               <span>{{v0}}</span><br>
@@ -403,9 +457,11 @@ app=new Eng({
 bt:'e-attr',
 index:1,
 str:`
-%1e-attr='class=class' || 'class=class1?red:blue' ||  'class=class2>10?red:blue' || 'class=class3==10?red:blue' 
-> 支持所有 可以直接赋值的 行内属性
-> 以 ; 分割不同属性  例: xxx=xx;xxx2=xx
+%1
+☆  e-attr='class=class' || 'class=class1?red:blue' ||  'class=class2>10?red:blue' || 'class=class3==10?red:blue' 
+
+●  支持所有 可以直接赋值的 行内属性
+●  以 ; 分割不同属性  例: xxx=xx;xxx2=xx
 %r
 appData=new Eng({
       ...
@@ -423,9 +479,11 @@ appData=new Eng({
 bt:'e-style',
 index:2,
 str:`
-%1e-style="width=width;backgroundColor=color";
-> 修改目标style样式, 
-> 注意是 驼峰属性名  backgroundColor✔  background-color✖  (  === 原生js 的 dom.style.xxxx=xxx)
+%1
+☆  e-style="width=width;backgroundColor=color";
+
+●  修改目标style样式, 
+●  注意是 驼峰属性名  backgroundColor✔  background-color✖  (  === 原生js 的 dom.style.xxxx=xxx)
 %r
 ~
 `
@@ -435,9 +493,10 @@ str:`
 bt:'e-input',
 index:3,
 str:`
-%1e-input='value'
+%1
+☆  e-input='value'
 
-> 用于所有支持 oninput 事件的 dom  例: <input text>  ...
+●  用于所有支持 oninput 事件的 dom  例: <input text>  ...
 %r
 ~
 ` 
@@ -447,9 +506,10 @@ str:`
 bt:'e-change',
 index:4,
 str:`
-%1e-change='value'
+%1
+☆  e-change='value'
 
-> 用于所有支持 onchange 事件的 dom  例: <input text> , <select> ...
+●  用于所有支持 onchange 事件的 dom  例: <input text>  , <select>...
 %r
 ~
 ` 
@@ -459,11 +519,11 @@ str:`
 bt:'e-event',
 index:5,
 str:`
-%1e-event="onclick=click" || "onclick=click;onblur=blur"
+%1
+☆  e-event="onclick=click" || "onclick=click;onblur=blur"
 
->  支持所有dom事件, 等价于 dom.onclick=click , 
-
->  %0注意%r : 数组循环内绑定的dom事件item参数 ,与数组外的有所区别 ,参下
+●  等价于 domNode.onclick=click , 
+●  %0注意%r : 数组循环内绑定的dom事件item参数 ,与数组外的有所区别 ,参下
 %r
 appData=new Eng({
       ...
@@ -515,9 +575,10 @@ appData=new Eng({
 bt:'e-html',
 index:6,
 str:`
-%1e-html="string",
+%1
+☆  e-html="string",
 
-> 等价于  domNode.innerHTML  ,  因为是覆盖式写入 e-html 节点的子元素均不会被 解析
+●  等价于  domNode.innerHTML  ,  因为是覆盖式写入 e-html 节点的子元素均不会被 解析
 %r
 ~
 `
@@ -527,9 +588,10 @@ str:`
 bt:'e-id',
 index:7,
 str:`
-%1e-id='idName'
+%1
+☆  e-id='idName'
 
-> 自定义节点名称(唯一) ,  通过 this.$_idDoms.idName  或  item.idDoms.idName 获取dom节点 
+●  自定义节点名称(唯一) ,  通过 this.$_idDoms.idName  或  item.idDoms.idName 获取dom节点 
 %r
 ~
 `
@@ -539,13 +601,14 @@ str:`
 bt:'e-for',
 index:8,
 str:`
-%1e-for='idForName'
+%1
+☆  e-for='idForName'
 
-> 数据中的所有数组数据
-> %0注意%r : 命名 唯一   
-> 响应支持 'push','unshift','pop','shift','splice','sort','reverse','concat' 方法
-> 被循环元素会添加到父元素的尾部, 所以 如果没有确定的父元素时, 会出现在同辈元素之后
-> {{$_index}} 输出被循环元素的 index ,  {{$_value}} 用于输出基本类型数组的数据
+●  当前路径被循环的数组数据
+●  %0注意%r : 命名 唯一 (因 watcherFor 的需要)   
+●  响应支持 'push','unshift','pop','shift','splice','sort','reverse','concat' 方法
+●  被循环元素会添加到父元素的尾部, 所以 如果没有确定的父元素时, 会出现在同辈元素之后
+●  {{$_index}} 输出被循环元素的 index ,  {{$_value}} 用于输出基本类型数组的数据
 %r
 html="
 <div>
@@ -581,9 +644,10 @@ appData=new Eng({
 bt:'e-stop',
 index:9,
 str:`
-%1e-stop
+%1
+☆  e-stop
 
-> Eng 不会解析有 e-stop 行内属性的节点 , 及其子元素
+●  Eng 不会解析有 e-stop 行内属性的节点 , 及其子元素
 %r
 
 ~
@@ -592,18 +656,16 @@ str:`
 
 //methods  #############################################################################################
 
-
-
 //获取操作Eng实例 ########################################################################################
 {
 bt:'获取操作Eng实例',
 },
-//获取实例
+//获取实例 通过 Eng.get(..)
 {
 bt:'通过 Eng.get(..)',
 str:`
 %1
-> 获取 Eng 实例 , 通过 appData  或  appName
+●  获取 Eng 实例 , 通过 appData  或  appName
 %r
 appData=new Eng({
      ...
@@ -634,7 +696,7 @@ appObj={
 bt:'通过实例 this 操作 ',
 str:`
 %1
-> 除了可以通过 Eng.get 的方式 也 可以通过实例创建后传递  this  操作 (不建议, 用法上稍有区别 , 大同小异)
+●  除了可以通过 Eng.get 的方式 也 可以通过实例创建后传递  this  操作 (不建议, 用法上稍有区别 , 大同小异)
 %r
 appObj=null;
 
@@ -671,9 +733,9 @@ bt:'自定义组件封装 ( 范例参考 )'
 bt:'自定义组件范例',
 str:`
 %1
->  自定义组件方法名 , 使用 html文本, 私有css样式 通过传参 调用 
->  
->  用途: 对于简单逻辑结构页面 没必要使用 前端路由 , 通过调用组件的 创建,销毁和休眠就可实现 等价 目标 (事实上 eng的 路由插件 也是基于此 实现, 只是更复杂一点)  
+●  自定义组件方法名 , 使用 html文本, 私有css样式 通过传参 调用 
+
+●  用途: 对于简单逻辑结构页面 没必要使用 前端路由 , 通过调用组件的 创建,销毁和休眠就可实现 等价 目标 (事实上 Eng的 Router组件 也是基于此 实现, 只是更复杂一点)  
 %r
 <script>
 
@@ -714,25 +776,15 @@ var component=function(parentDom,data){   //parentDom : 父元素,  data:组件�
 {
 bt:'Router组件 与 routerCfg配置 '
 },
-//范例
-{
-bt:'deom 范例 参看 github demo ',
-str:`
-%1
-
->  213123123
-%r
-
-`
-},
 //实现思路
 {
 bt:'routerCfg 的思路架构',    
 str:`
 %1
->  正如Eng 的实现思路 : ( JSON数据结构 与 DOM 树的 结构几乎一致 , 彼此通过 路径匹配 映射,  进而数据关联 )  
-   Eng 路由插件 就是 一个 new Eng() 组件对象 , 其实现思路也是 基于  JSON 结构  
->  基本逻辑思路结构参下:   
+●  正如Eng 的实现思路 : ( JSON数据结构 与 DOM 树的 结构几乎一致 , 彼此通过 路径匹配 映射,  进而数据关联 )  
+     Eng 路由插件 就是 一个 new Eng() 组件对象 , 其实现思路也是 基于  JSON 结构  
+
+●  基本逻辑思路结构参下:   
 %r
 %1
 //1: 根据页面结构 , 将页面划分为不同区域 , 同级/辈区域 一般为互斥关系
@@ -763,11 +815,11 @@ routerCfg={
 bt:'routerCfg 参数配置说明',    
 str:`
 %1
->  routerCfg 全参数配置说明  ()
+☆  routerCfg 全参数配置说明  ()
 
->  区域组件: 用于容纳 私有组件 和 公共组件  ; 
->  私有组件: 每个区域事先定义的固有组件 ,  须先在每个区域定义 ; 
->  公共组件: 可以自由活动的组件 , 在不同区域间转移 , 共有  
+●  区域组件: 用于容纳 私有组件 和 公共组件  ; 
+●  私有组件: 每个区域事先定义的固有组件 ,  须先在每个区域定义 ; 
+●  公共组件: 可以自由活动的组件 , 在不同区域间转移 , 共有  
 %r
 
 var routerCfg={
@@ -852,10 +904,10 @@ var routerCfg={
 bt:'routerCfg 简略配置 (范例参考)',    
 str:`
 %1
->  步骤 1: 引入 eng.js  , 2: 配置路由 routerCfg  3:引入 eng_router.js 
+●  步骤 1: 引入 eng.js  , 2: 配置路由 routerCfg  3:引入 eng_router.js 
 %r
 
-%1>  简略配置  %r
+%1●  简略配置  %r
 var routerCfg={
       //开发模式
       env:'dev',
@@ -889,8 +941,8 @@ var routerCfg={
       },
 };
 
-%1>  以上配置中可见 :  login 与 workArea 区域页面互斥 , workArea区域下 zj0和1互斥, zj2和3互斥 
-   默认打开 login 页面 ,   workArea下默认显示 zj0 和 zj2
+%1●  以上配置中可见 :默认打开 login 区域 ,  login 与 workArea 区域页面互斥 
+                     workArea下默认显示 zj0 和 zj2 其下 zj0和1互斥, zj2和3互斥 
 %r
 `
 },
@@ -903,7 +955,7 @@ bt:'Router 项目结构与开发',
 bt:'项目结构',    
 str:`
 %1
->  Router 提供一个 基于node 的基本后端服务文件  eng_server.js
+●  Router 提供一个 基于node 的基本后端服务文件  eng_server.js
 %r
   node eng_server 80     (启动服务 端口号不设置 则默认80)
 
@@ -914,7 +966,7 @@ str:`
 
 ----------------
 %1
->  后端配置文件 , 逻辑结构简单 , 一目了然 eng_server_cfg.txt        (为什么不是 .json ? 因为写注释要报错, 强迫症请自行修改!)
+●  后端配置文件 , 逻辑结构简单 , 一目了然 eng_server_cfg.txt        (为什么不是 .json ? 因为写注释要报错, 强迫症请自行修改!)
 %r
 {
     //项目根路径
@@ -938,11 +990,11 @@ str:`
 bt:'开发组件页面', 
 str:`
 %1
->  Eng的组件开发页面 仍然是传统的 标准 html , 区别是删除了额外的标签干扰项
->  html的命名必须与组件id一致  (与Router 约定的格式  )
->  JS 部分定义一个固定格式     (与Router 约定的格式 )
+●  Eng的组件开发页面 仍然是传统的 标准 html , 区别是删除了额外的标签干扰项
+●  html的命名必须与组件id一致  (与Router 约定的格式  )
+●  JS 部分定义一个固定格式     (与Router 约定的格式 )
 %r
->  例: ------ test.html -------- 
+●  例: ------ test.html -------- 
 
         <style>
              ....
@@ -965,13 +1017,13 @@ str:`
 
         </script>
 %1
->  页面只有 style , html 和 script标签 , 删除所有无关选项 ( eng_server.js 通过正则 分离合并)
->  html 不是根标签 , 不是组件本身
->  script 基本固定配置 必须如上所示, 因为这是与 Router 和 eng_server.js 约定好的解析格式 (当然你也可以自行修改)
+●  页面只有 style , html 和 script标签 , 删除所有无关选项 ( eng_server.js 通过正则 分离合并)
+●  html 不是根标签 , 不是组件本身
+●  script 基本固定配置 必须如上所示, 因为这是与 Router 和 eng_server.js 约定好的解析格式 (当然你也可以自行修改)
 
->  以上部分最终会被合并解析为如下js 格式 返回前端
+●  以上部分最终会被合并解析为如下js 格式 返回前端
 %r
->  ---------- test.js ---------
+●  ---------- test.js ---------
 
 Router.components.test=function(parentDom,data){
   var css="....";
@@ -986,10 +1038,10 @@ Router.components.test=function(parentDom,data){
       return  Eng.get(app);   
 };
 %1
->  参数:
+●  参数:
        parentDom : 就是组件的父元素位置 , 通过routerCfg配置指定
        data :      创建组件时传递给组件的数据
->  实际上就是约定规定了一个 方便解析处理的固定格式 , 合并为一个闭包组件函数  (二次开发 , 可自行修改)
+●  实际上就是约定规定了一个 方便解析处理的固定格式 , 合并为一个闭包组件函数  (二次开发 , 可自行修改)
 
 %r
 `
@@ -1003,11 +1055,11 @@ bt:'Router 基本方法',
 bt:'Router.openArea(...) 打开指定区域',    
 str:`
 %1
-Router.openArea( areaName , data , callback)
+☆  Router.openArea( areaName , data , callback)
 
->  areaName : 要打开的区域名          (注意: 会触发 routerCfg的默认配置, 该区域的父容器必须存在 )
->  data :     传递给组件的数据 ,      (注意: 只在首次创建时生效, 存活中的区域组件无效 )
->  callback:  完成时回调 , 参数 err   (注意: err= 'err'||'stop' , 前者加载失败, 后者被其它组件阻止) 
+●  areaName : 要打开的区域名          (注意: 会触发 routerCfg的默认配置, 该区域的父容器必须存在 )
+●  data :     传递给组件的数据 ,      (注意: 只在首次创建时生效, 存活中的区域组件无效 )
+●  callback:  完成时回调 , 参数 err   (注意: err= 'err'||'stop' , 前者加载失败, 后者被其它组件阻止) 
 
 %r
 `
@@ -1017,10 +1069,10 @@ Router.openArea( areaName , data , callback)
 bt:'Router.closeArea(...) 关闭指定区域',    
 str:`
 %1
-Router.closeArea( areaName , force)
+☆  Router.closeArea( areaName , force)
 
->  areaName : 要关闭的区域名称
->  force    : true时, 强制销毁 设置为 sleep 的区域组件
+●  areaName : 要关闭的区域名称
+●  force    : true时, 强制销毁 设置为 sleep 的区域组件
 %r
 `
 },
@@ -1029,11 +1081,11 @@ Router.closeArea( areaName , force)
 bt:'Router.openComponent(...) 打开指定组件',    
 str:`
 %1
-Router.openComponent( name , data , callBack )
+☆  Router.openComponent( name , data , callBack )
 
->  name :    要打开的组件名称
->  data :    传递给组件的数据 ,      (注意: 只在首次创建时生效, 存活中的区域组件无效 )
->  callBack: 完成时回调 , 参数 err   (注意: err= 'err'||'loading' , 前者加载失败, 后者重复加载 ) 
+●  name :    要打开的组件名称
+●  data :    传递给组件的数据 ,      (注意: 只在首次创建时生效, 存活中的区域组件无效 )
+●  callBack: 完成时回调 , 参数 err   (注意: err= 'err'||'loading' , 前者加载失败, 后者重复加载 ) 
 %r
 `
 },
@@ -1042,10 +1094,10 @@ Router.openComponent( name , data , callBack )
 bt:'Router.closeComponent(...) 关闭指定组件',    
 str:`
 %1
-Router.closeComponent( name , force)
+☆  Router.closeComponent( name , force)
 
->  name   :  要关闭的组件名称
->  force  :  true时, 强制销毁 设置为 sleep 的组件
+●  name   :  要关闭的组件名称
+●  force  :  true时, 强制销毁 设置为 sleep 的组件
 %r
 `
 },
@@ -1054,13 +1106,13 @@ Router.closeComponent( name , force)
 bt:'Router.openElementToArea(...) 将指定组件添加到指定的 区域.位置',    
 str:`
 %1
-Router.openElementToArea( name , areaPosition , data , callback)
+☆  Router.openElementToArea( name , areaPosition , data , callback)
 
->  主要用于公共活动组件的创建
->  name :     要打开的组件名称          (注意: 会触发 routerCfg的默认配置, 该区域的父容器必须存在 )
->  areaPosition: 要添加的 '区域.位置'   
->  data :     传递给组件的数据 ,        (注意: 只在首次创建时生效, 存活中的区域组件无效)
->  callback:  完成时回调 , 参数 err     (注意: err= 'err'||'stop' , 前者加载失败, 后者被其它组件阻止) 
+●  主要用于公共活动组件的创建
+●  name :     要打开的组件名称          (注意: 会触发 routerCfg的默认配置, 该区域的父容器必须存在 )
+●  areaPosition: 要添加的 '区域.位置'   
+●  data :     传递给组件的数据 ,        (注意: 只在首次创建时生效, 存活中的区域组件无效)
+●  callback:  完成时回调 , 参数 err     (注意: err= 'err'||'stop' , 前者加载失败, 后者被其它组件阻止) 
 %r
 `
 },
@@ -1068,6 +1120,8 @@ Router.openElementToArea( name , areaPosition , data , callback)
 {
 bt:'Router.addAreaListener(...) 监听区域开关事件',    
 str:`
+☆  Router.addAreaListener({...})
+
 示例:
     Router.addAreaListener({
         name:'name',
@@ -1078,9 +1132,9 @@ str:`
         },
     });
 %1
->  name : 区域名称
->  evt  : 事件类型 "open" , "created" , "close" ;  当监听"open"事件时, return true 才能打开,   注意:这里不支持异步
->  err  : 打开失败 (若为真) 
+●  name : 区域名称
+●  evt  : 事件类型 "open" , "created" , "close" ;  当监听"open"事件时, return true 才能打开,   注意:这里不支持异步
+●  err  : 打开失败 (若为真) 
 %r
 `
 },
@@ -1089,7 +1143,7 @@ str:`
 bt:'Router.openDefault() 打开默认区域',    
 str:`
 %1
->  打开默认区域 , 多用于首页 或 异常返回 
+●  打开默认区域 , 多用于首页 或 异常返回 
 
 %r
 `
@@ -1099,9 +1153,10 @@ str:`
 bt:'注意事项 与 使用技巧',    
 str:`
 %1
->  可与绝大部分插件混用 , 但当组件关闭时, 要注意其它插件的及时销毁 , 在 methods.onDestroy 方法内销毁
 
->  可以与 vue 混用 , vue的 v-pre 指令 和 Eng 的 e-stop 指令的 子元素可以作为组件对象, 互不干扰   
+●  可与绝大部分插件混用 , 但当组件关闭时, 要注意其它插件的及时销毁 , 在 methods.onDestroy 方法内销毁
+
+●  可以与 vue 混用 , vue的 v-pre 指令 和 Eng 的 e-stop 指令的 子元素可以作为组件对象, 互不干扰   
 
 %r
 `
@@ -1130,7 +1185,8 @@ Dom的结构事实上 是一个 json 树  , 与 josn 数据结构本身几乎一
 
 所以 先有%0想法思路%r 后有代码 , 读完整源码并不见得对你有什么质帮助!!!!!! 基础知识点的掌握与应用才是根本 (刷题并不能提高你得开发能力, 除了面试)
 
-PS: 时隔多年 , 因方便简化工作内容需要 , (当初认为, 会出现大量 专用碎片化, 但简单易用的数据渲染插件 , 但事与愿违 , 全家桶流水线统一天下 ) 遂更新2.0 自用or分享
+PS: 时隔多年 , 因方便简化工作内容需要 , (当初认为, 会出现大量 专用碎片化, 但简单易用的数据渲染插件 , 但事与愿违 , 全家桶统一天下 ) 遂更新2.0 自用or分享  
+   (期间拿Eng1.0 写的部分试验型轮子 , 参看github)
 
 %r
 `

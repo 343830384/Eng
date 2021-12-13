@@ -325,10 +325,14 @@
     .chartreuse{
         color:chartreuse;
     }
+    .img{
+       display:block;
+       width:600px; 
+       margin-left:0;
+    }
   </style>
 </head>
 <body e-event='onmousemove=mMove'>
-
  <!-- top -->
  <div id="t_">
       <div class="t_l">
@@ -716,6 +720,8 @@ var API=new Eng({
                 str=str.replace(/(%0)/g,'<span class="c_r">'); //红色
                 str=str.replace(/(%1)/g,'<span class="c_b">'); //蓝色    
                 str=str.replace(/(%r)/g,'</span>'); 
+                str=str.replace(/(img\()/g,"<img class='img' src='");
+                str=str.replace(/(\)img)/g,"'>");
               return str;
          },
 
