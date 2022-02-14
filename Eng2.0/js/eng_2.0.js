@@ -542,7 +542,7 @@ var getBaseData=function(data,path){
  out: 返还引用数据
  */
 var analyzeFor=function(dom,arr,out){
-     var a=dom,b=dom.childNodes,i=0,l=b.length ,c,d,e,f,g,h,o,i,j,k,n,u;
+     var a=dom,b=dom.childNodes,i=0,l=b.length ,c,d,e,f,g,h,o,j,k,n,u;
           c=a.nodeName; //node Name
           d=a.attributes;
           if(l===0){
@@ -1434,7 +1434,7 @@ Eng.prototype.dataInit=function(DATA){
            * @param      jbF   true: 数组数据是基本类型 ,false 不是
            */
            t.bindKey=function(key,obj,type,path,pos,arrF,del,jbF){
-              var value=obj[key],flag, nrr,treeD,domArr,keyStr=path.join('.'),reg=reg=/^\$\_/,wFun,reV,bF,rf,aF,u;
+              var value=obj[key],flag, nrr,treeD,domArr,keyStr=path.join('.'),reg=/^\$\_/,wFun,reV,bF,rf,aF,u;
                     
                     // console.log(path)
                     // debugger
