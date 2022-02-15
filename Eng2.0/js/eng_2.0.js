@@ -3,6 +3,8 @@
 
 
 uglifyjs eng_2.0.js -m -c -o eng_2.0.min.js   //压缩 =>   混淆,压缩,输出
+
+1.修复timer 初始化没有正确触发的bug
 */
 (function(){
 /*
@@ -933,7 +935,7 @@ window.Eng=function(cfg){
        mf.$_idDoms=items.$_idDoms;
        mf.$_data=items.$_data;
        mf.$_id=items.$_id;
-       mf.$_state='active';
+       mf.$_state='sleep';   //触发下方onAwake() 修改为 active ,初始化时 同时触发timer计时器
        t.sleep=false;
        t.items.$_data=data;
 
@@ -2142,7 +2144,7 @@ Eng.prototype.extraInit=function(){
    var pDom=null; //el 的 初始父元素 
         //转换成 可直接 push 到timeArr 队列的格式
         t.timerInit=function(){
-             var k,o=timer,v,d;
+             var k,o=timer,v,d,l=0;
                 for(k in o){
                      v=o[k];
                      d=[];
@@ -2174,6 +2176,7 @@ Eng.prototype.extraInit=function(){
         t.onAwake=function(dom,args){
              var f=$f.$_state==='active'?false:true;  //当前是否激活状态
                  if(f){//防止无意义，反复触发定时器初始化
+                        
                          if(arr.length===0)t.timerInit(); //检查是否有定时器
                          var l=arr.length,d;
                               while(l--){
