@@ -791,12 +791,13 @@ startTime=getTime();
 var eId=-1;       //标记id 每次调用++;
 var getStyle=function(str,id){
      var reg=/\/\*[\s\S]*?\*\//g;      // 块注释
-     var reg0=/\/\/[\s\S]*(?=\r|\n|$)/g;// 行注释
+     // var reg0=/\/\/[\s\S]*(?=\r|\n|$)/g;// 行注释
      var reg1=/(\{[^{}]*\})/g;          // 匹配所有  {xx} 样式属性内容  
      var reg3=/\s+/g;                   // 分割后 所有 id 类名 标签的  大于2的间隔
      var css='',arr,i=0,l,v,sv='',cv='',ar,s=0,e=0,n;
      var pj='[eng_'+id+']';
-         str=str.replace(reg,'').replace(reg0,'');    // 去除块和行注释
+     //     str=str.replace(reg,'').replace(reg0,'');    // 去除块和行注释 ( 行注释与base64冲突,且标准环境无法使用行注释,故保留)
+          str=str.replace(reg,'');    // 去除块注释
          str=str.trim();              // 去除两侧空格s
          css=str.replace(reg3,' ');   // 去除多余空格 (大于2个的空格)   (待匹配修改的纯净 css 文本)
      //     debugger
