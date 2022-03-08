@@ -459,7 +459,7 @@ str:`
 %1
 ☆  e-attr='class=class' || 'class=class1?red:blue' ||  'class=class2>10?red:blue' || 'class=class3==10?red:blue' 
 
-●  支持所有 可以直接赋值的 行内属性
+●  支持所有 可以直接赋值的 行内属性 和 直接属性
 ●  以 ; 分割不同属性  例: xxx=xx;xxx2=xx
 %r
 appData=new Eng({
