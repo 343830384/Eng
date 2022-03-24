@@ -165,11 +165,15 @@ var abk=function(V){
         });
         a=null;
         //自定义处理方法
-        o.zdy=function(v){
+        o.$_zdy=function(v){
              p=v;
-             delete o.zdy;
+             delete o.$_zdy;
         };
-        obk(o,'zdy',{enumerable:false});
+        obk(o,'$_zdy',{enumerable:false});
+        //标记为特殊数组
+        o.$_sign=true;
+        obk(o,'$_sign',{enumerable:false,writable:false,configurable:false});
+        //
         o.concat(V);
      //   var i=0,l=V.length;   
      //       while(i<l){
@@ -1346,7 +1350,7 @@ Eng.prototype.dataInit=function(DATA){
                           pth.push(k);
                           jbF=limit[n];      // true:基本数据类型 , false: 数组或json
                           //2.1
-                          if(n===4){
+                          if(n===4&&!v.$_sign){
                               v=abk(v);     // 变更为响应数组 t.bindKey 绑定自定义方法
                               o[k]=v;       //
                           };
@@ -1493,7 +1497,7 @@ Eng.prototype.dataInit=function(DATA){
                                       t.specialBuild(key,value,path,pos,keyF,args);
                                       t.forData(value,path,true,true,pos,false);
                               };
-                              value.zdy(aF);   //数组方法绑定
+                              if(value.$_zdy)value.$_zdy(aF);   //数组方法绑定
                               // Arr.push(value); // 原型链操作 数组 对象
                               /**
                                * keyF=>     push,pop,splice,concat,... 执行的支持方法名称,  
@@ -1540,7 +1544,7 @@ Eng.prototype.dataInit=function(DATA){
                                         }else{       //4 - array 全新的 完全 覆盖数据
                                              //  t.dataClear(value,s);
                                              value=abk(s);
-                                             value.zdy(aF); //数组方法绑定
+                                             value.$_zdy(aF); //数组方法绑定
                                               t.forBuild(key,0,value.length,path,pos,2,value);
                                               t.forData(value,path,true,true,pos,false);//重新绑定
                                         };
