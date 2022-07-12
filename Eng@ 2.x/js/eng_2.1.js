@@ -7,6 +7,7 @@ uglifyjs eng_2.1.js -m -c -o eng_2.1.min.js   //压缩 =>   混淆,压缩,输出
 1.修复timer 初始化没有正确触发的bug
 2.修复 css文件中bass64导致的解析错误
 3.修复 domEvent 在数组数据事件中,forDataAll指向错误
+4.修复 for循环中 addWatcher ( {xxx:(Old,New,item){ },}) 的路径拼接错误
 */
 (function(){
 /*
@@ -1966,7 +1967,7 @@ Eng.prototype.forInit=function(){
                          if(F===u)a.$_items=d;
                          if(wf!==u){
                               d.addWatcher=function(obj){
-                                    var str=ptr+'.'+i+'.'; //前置路径
+                                    var str=ptr+'.'+i; //前置路径
                                         t.addWatcher(str,obj);
                               };
                               /**
