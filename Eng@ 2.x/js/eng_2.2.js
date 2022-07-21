@@ -10,6 +10,7 @@ uglifyjs eng_2.2.js -m -c -o eng_2.2.min.js   //压缩 =>   混淆,压缩,输出
 4.修复 for循环中 addWatcher ( {xxx:(Old,New,item){ },}) 的路径拼接错误
 5.修复 多级e-base嵌套的数据 覆盖错误 (会覆盖同级最后一个 同父名路径 , 例如:  同级别 'base0.abc','base0.def' 最后处理的会覆盖之前的,导致其中一个不生效 )
 6.修复 json或array类型数据直接覆盖导致的 , watcher关系失效 
+7.修改 json和array类型数据的覆盖方式为 赋值式 , 取消覆盖式 ( 因为会导致某些引用关系逻辑异常 )
 */
 (function(){
 /*
@@ -1416,7 +1417,7 @@ Eng.prototype.dataInit=function(DATA){
            * @param {*} oD   旧值
            * @param {*} nD   新值
            */ 
-          t.dataClear=function(oD,nD){
+          /* t.dataClear=function(oD,nD){
                var k,v,n,nv,ol,nl,u;
                    if(nD===u)nD={}; // 用于全部 删除时的临时 空数据 , 防报错 
                    for(k in oD){
@@ -1441,8 +1442,33 @@ Eng.prototype.dataInit=function(DATA){
                               // 普通值 不做处理 ,理应 新值覆盖 ,使用者的事, 我不越权处理   (否则会发生 数组 排序插入时, 会有不可预期的后果 ) ~~~~~
                         };
                    };
+          }; */
+           
+          /**
+           * json数据覆盖  2022-07-21  (赋值式修改, 取消覆盖式)
+           * @param {*} n  新的json值
+           * @param {*} o  旧的json值
+           */
+          t.jsonCover=function(n,o){
+               var k,v;
+                   for(k in n){
+                       v=n[k];    //如果v是 json 或array的话, 还会继续触发这个方法,因此,无需做判断
+                       o[k]=v;  
+                   };
           };
-
+           /**
+           * array数据覆盖    2022-07-21  (赋值式修改, 取消覆盖式)
+           * @param {*} n  新的array值
+           * @param {*} o  旧的array值
+           */
+          t.arrCover=function(n,o){
+               var i=0,l=n.length,ol=o.length;
+                   if(l<ol)o.splice(l); //删掉多余的
+                   while(i<l){
+                       o[i]=n[i];
+                       i++;
+                   };    
+          };
           /**
            * 将数据进行绑定 进行绑定 
            * @param {*}  key 
@@ -1455,120 +1481,116 @@ Eng.prototype.dataInit=function(DATA){
            * @param      jbF   true: 数组数据是基本类型 ,false 不是
            */
            t.bindKey=function(key,obj,type,path,pos,arrF,del,jbF){
-              var value=obj[key],flag, nrr,treeD,domArr,keyStr=path.join('.'),reg=/^\$\_/,wFun,reV,bF,rf,aF,u;
+               var value=obj[key],flag, nrr,treeD,domArr,keyStr=path.join('.'),reg=/^\$\_/,wFun,reV,bF,rf,aF,u;
                     
-                    // console.log(path)
-                    // debugger
-                   //wFun : 匹配的watcher方法
-                   wFun=$W[keyStr];
-                   if(!del&&wFun){ //判断 watcher关系 
-                       //delete $W[keyStr];                // 不再清除 (防止完全覆盖新值时, 对应处理方法失效)
-                        reV=wFun.apply($f,[u,value,item]); // 返回值
-                        if(reV!==u){
-                             value=reV;
-                             obj[key]=reV;
-                        }; 
-                   };    
-                    // console.log(keyStr);
-                    nrr=t.pathDest(path,arrF);   //   [treeValueD , domArr] 
-                    treeD=nrr[0];                //   treeValueD  
-                    domArr=nrr[1];
-                    nrr=null;
-                    flag=limit[type];            //  true:可直接赋值的数据 (string,number,boolean) ,  flase:路径数据 {},[]
-                    if(treeD===u){
-                         //console.warn('不存在的 tree数据路径 =>  '+path.toString());
-                          flag=false;            //  (对于 没有对应 dom 赋值的数据  ,   作为响应数据使用 )
-                          bF=true;               //  纯数据响应绑定,
-                    }; 
-                   //  console.log(path.toString());
-                   //  可直接赋值的属性 
-                   if(flag){
-                    // if(del||value===u)value='';        //清空数据
-                       if(jbF===false){ // 普通基本类型数据
-                            t.valueToDom(treeD,value,domArr,key,obj);
-                       }else{//基本类型数组数据                              //注意!!!!!   后期改成 name + pos 指向 index 和 value (因为要 支持数据过滤) !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                            if(treeD.$_index)t.valueToDom(treeD.$_index,key,domArr,key,obj);   //存在 $_index数据
-                            if(treeD.$_value)t.valueToDom(treeD.$_value,value,domArr,key,obj); //存在 $_value数据 
-                            if(del)return; //无需向下执行
-                       };
-                   };    
-                   if(type===4){//Array 对象    del=true时,直接在其它地方删除了    !!!!!!!!!!
-                              /* if(del){
-                                   console.log('从未执行过 ,暂时注销 ~~~~~')
-                                   value=[];
-                                   obj[key]=value;
-                                   return;
-                              }; */
-                              aF=function(keyF,args){
-                                   //     debugger;
-                                      t.specialBuild(key,value,path,pos,keyF,args);
-                                      t.forData(value,path,true,true,pos,false);
+               // console.log(path)
+               // debugger
+              //wFun : 匹配的watcher方法
+              wFun=$W[keyStr];
+              if(!del&&wFun){ //判断 watcher关系 
+                   //delete $W[keyStr];               // 不再清除 (防止完全覆盖新值时, 对应处理方法失效)
+                   reV=wFun.apply($f,[u,value,item]); //返回值
+                   if(reV!==u){
+                        value=reV;
+                        obj[key]=reV;
+                   }; 
+              };    
+               // console.log(keyStr);
+               nrr=t.pathDest(path,arrF);   //   [treeValueD , domArr] 
+               treeD=nrr[0];                //   treeValueD  
+               domArr=nrr[1];
+               nrr=null;
+               flag=limit[type];            //  true:可直接赋值的数据 (string,number,boolean) ,  flase:路径数据 {},[]
+               if(treeD===u)bF=true;        //  纯数据响应绑定,不涉及 dom操作  2022-07-21
+               
+              //  console.log(path.toString());
+              //  可直接赋值的属性 
+              if(flag&&!bF){                         // 2022-07-21
+               // if(del||value===u)value='';        //清空数据
+                  if(jbF===false){ // 普通基本类型数据
+                       t.valueToDom(treeD,value,domArr,key,obj);
+                  }else{//基本类型数组数据                              //注意!!!!!   后期改成 name + pos 指向 index 和 value (因为要 支持数据过滤) !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                       if(treeD.$_index)t.valueToDom(treeD.$_index,key,domArr,key,obj);   //存在 $_index数据
+                       if(treeD.$_value)t.valueToDom(treeD.$_value,value,domArr,key,obj); //存在 $_value数据 
+                       if(del)return; //无需向下执行
+                  };
+              };    
+              if(type===4){//Array 对象    del=true时,直接在其它地方删除了    !!!!!!!!!!
+                         /* if(del){
+                              console.log('从未执行过 ,暂时注销 ~~~~~')
+                              value=[];
+                              obj[key]=value;
+                              return;
+                         }; */
+                         aF=function(keyF,args){
+                              //     debugger;
+                                 t.specialBuild(key,value,path,pos,keyF,args);
+                                 t.forData(value,path,true,true,pos,false);
+                         };
+                         if(value.$_zdy)value.$_zdy(aF);   //数组方法绑定
+                         // Arr.push(value); // 原型链操作 数组 对象
+                         /**
+                          * keyF=>     push,pop,splice,concat,... 执行的支持方法名称,  
+                          * args=>[]   arguments (执行这些方法时的参数)
+                          */
+                         // Fun.push(function(keyF,args){   // 数据  push,pop 之类 改变数时触发的方法 
+                         //           t.specialBuild(key,value,path,pos,keyF,args);
+                         //           t.forData(value,path,true,true,pos,false);
+                         // });
+                         // value.__proto__=proto; // 新的原型指向
+              };
+          var enFlag=!reg.test(key);      // 非 $_开头的可枚举 (自定义数据  )
+              if(key==='$_index')rf=true; // 不响应修改的数据  (外部设置无效)
+              obk(obj, key, {
+                    enumerable:enFlag, //可枚举   false:不可枚举, true:可枚举  $_index 不可枚举
+                    // configurable: false, //默认false    true时允许修改其它属性描述符 如enumerable , writable 但没必要
+                    set:function(s){
+                              if(rf)return value;
+                             //数据响应绑定检查~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                              /*
+                              JSON 或 Array 不会执行到这一步 ,   基本类型会才会t.bindKey(...) 重新绑定   2022-07-21 
+                              if($W[keyStr]!==u){
+                                   wFun=$W[keyStr]
+                                   delete $W[keyStr];
+                                   reV=wFun.apply($f,[value,s,item]); //返回值
+                                   if(reV!==u)s=reV;
+                              }else if(wFun!==u){
+                                   reV=wFun.apply($f,[value,s,item]); //返回值
+                                   if(reV!==u)s=reV;
+                              };   */
+                              if(wFun!==u){
+                                   reV=wFun.apply($f,[value,s,item]); //返回值
+                                   if(reV!==u)s=reV;  
                               };
-                              if(value.$_zdy)value.$_zdy(aF);   //数组方法绑定
-                              // Arr.push(value); // 原型链操作 数组 对象
-                              /**
-                               * keyF=>     push,pop,splice,concat,... 执行的支持方法名称,  
-                               * args=>[]   arguments (执行这些方法时的参数)
-                               */
-                              // Fun.push(function(keyF,args){   // 数据  push,pop 之类 改变数时触发的方法 
-                              //           t.specialBuild(key,value,path,pos,keyF,args);
-                              //           t.forData(value,path,true,true,pos,false);
-                              // });
-                              // value.__proto__=proto; // 新的原型指向
-                   };
-               var enFlag=!reg.test(key);      // 非 $_开头的可枚举 (自定义数据  )
-                   if(key==='$_index')rf=true; // 不响应修改的数据  (外部设置无效)
-                   obk(obj, key, {
-                         enumerable:enFlag, //可枚举   false:不可枚举, true:可枚举  $_index 不可枚举
-                         // configurable: false, //默认false    true时允许修改其它属性描述符 如enumerable , writable 但没必要
-                         set:function(s){
-                                   if(rf)return value;
-                                  //数据响应绑定检查~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                                   /*
-                                   JSON 或 Array 不会执行到这一步 ,   基本类型会才会t.bindKey(...) 重新绑定   2022-07-21 
-                                   if($W[keyStr]!==u){
-                                        wFun=$W[keyStr]
-                                        delete $W[keyStr];
-                                        reV=wFun.apply($f,[value,s,item]); //返回值
-                                        if(reV!==u)s=reV;
-                                   }else if(wFun!==u){
-                                        reV=wFun.apply($f,[value,s,item]); //返回值
-                                        if(reV!==u)s=reV;
-                                   };   */
-                                   if(wFun!==u){
-                                        reV=wFun.apply($f,[value,s,item]); //返回值
-                                        if(reV!==u)s=reV;
+                             //类型 判断 ~~~~~~~~~~~~~~~~~~~~~~~~~
+                         var type2= typeLX(s);
+                             if(flag&&value!==s&&limit[type2]){ //类型不匹配时 ,只有 1:string,2:boolean,3:number  基本类型允许相互覆盖
+                                   value=s; 
+                                   if(bF)return;    // bF:纯数据响应,不涉及dom操作   2022-07-21
+                                   t.valueToDom(treeD,value,domArr,key,obj);
+                             }else if(!flag&&type===type2){//类型相同     json 或array
+                                   if(type==5){ //5   json 全新的覆盖数据
+                                        //  t.dataClear(value,s);
+                                        //  value=s;
+                                        //  t.forData(value,path,false,arrF,pos,false);//重新绑定
+                                            t.jsonCover(s,value);                  //2022-07-21  (赋值式修改, 取消覆盖式)
+                                   }else{       //4 - array 全新的 完全 覆盖数据
+                                        //  t.dataClear(value,s);
+                                        // value=abk(s);
+                                        //  value.$_zdy(aF); //数组方法绑定
+                                         t.arrCover(s,value);                      //2022-07-21  (赋值式修改, 取消覆盖式)
+                                        
+                                         if(!bF)t.forBuild(key,0,value.length,path,pos,2,value);    // bF:纯数据响应,不涉及dom操作 022-07-21
+                                         t.forData(value,path,true,true,pos,false);//重新绑定
                                    };
-                                  //纯数据响应~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                                  if(bF===true){ 
-                                       value=s;
-                                       return
-                                  };
-                                  //类型 判断 ~~~~~~~~~~~~~~~~~~~~~~~~~
-                              var type2= typeLX(s);
-                                  if(flag&&value!==s&&limit[type2]){ //类型不匹配时 ,只有 1,2,3类型允许相互覆盖
-                                        value=s; 
-                                        t.valueToDom(treeD,value,domArr,key,obj);
-                                  }else if(!flag&&type===type2){//类型相同     json 或array
-                                        if(type==5){ //5   json 全新的覆盖数据
-                                             //  t.dataClear(value,s);
-                                              value=s;
-                                              t.forData(value,path,false,arrF,pos,false);//重新绑定
-                                        }else{       //4 - array 全新的 完全 覆盖数据
-                                             //  t.dataClear(value,s);
-                                             value=abk(s);
-                                             value.$_zdy(aF); //数组方法绑定
-                                              t.forBuild(key,0,value.length,path,pos,2,value);
-                                              t.forData(value,path,true,true,pos,false);//重新绑定
-                                        };
-                                  }else{
-                                        // console.error('错误的数据类型 覆盖  ');
-                                  }; 
-                         },
-                         get:function(){
-                                return value; 
-                         }
-                   });
+                             }else{
+                                   // console.error('错误的数据类型 覆盖  ');
+                             }; 
+                    },
+                    get:function(){
+                           return value; 
+                    }
+              });
            };
           /**
            * 通过path路径指向数据目录 并返回
