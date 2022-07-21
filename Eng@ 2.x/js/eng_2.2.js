@@ -8,7 +8,8 @@ uglifyjs eng_2.2.js -m -c -o eng_2.2.min.js   //压缩 =>   混淆,压缩,输出
 2.修复 css文件中bass64导致的解析错误
 3.修复 domEvent 在数组数据事件中,forDataAll指向错误
 4.修复 for循环中 addWatcher ( {xxx:(Old,New,item){ },}) 的路径拼接错误
-4.修复 多级e-base嵌套的数据 覆盖错误 (会覆盖同级最后一个 同父名路径 , 例如:  同级别 'base0.abc','base0.def' 最后处理的会覆盖之前的,导致其中一个不生效 )
+5.修复 多级e-base嵌套的数据 覆盖错误 (会覆盖同级最后一个 同父名路径 , 例如:  同级别 'base0.abc','base0.def' 最后处理的会覆盖之前的,导致其中一个不生效 )
+6.修复 json或array类型数据直接覆盖导致的 , watcher关系失效 
 */
 (function(){
 /*
@@ -1461,8 +1462,8 @@ Eng.prototype.dataInit=function(DATA){
                    //wFun : 匹配的watcher方法
                    wFun=$W[keyStr];
                    if(!del&&wFun){ //判断 watcher关系 
-                        delete $W[keyStr];
-                        reV=wFun.apply($f,[u,value,item]); //返回值
+                       //delete $W[keyStr];                // 不再清除 (防止完全覆盖新值时, 对应处理方法失效)
+                        reV=wFun.apply($f,[u,value,item]); // 返回值
                         if(reV!==u){
                              value=reV;
                              obj[key]=reV;
@@ -1523,6 +1524,8 @@ Eng.prototype.dataInit=function(DATA){
                          set:function(s){
                                    if(rf)return value;
                                   //数据响应绑定检查~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                   /*
+                                   JSON 或 Array 不会执行到这一步 ,   基本类型会才会t.bindKey(...) 重新绑定   2022-07-21 
                                    if($W[keyStr]!==u){
                                         wFun=$W[keyStr]
                                         delete $W[keyStr];
@@ -1531,7 +1534,11 @@ Eng.prototype.dataInit=function(DATA){
                                    }else if(wFun!==u){
                                         reV=wFun.apply($f,[value,s,item]); //返回值
                                         if(reV!==u)s=reV;
-                                   };  
+                                   };   */
+                                   if(wFun!==u){
+                                        reV=wFun.apply($f,[value,s,item]); //返回值
+                                        if(reV!==u)s=reV;
+                                   };
                                   //纯数据响应~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                                   if(bF===true){ 
                                        value=s;
