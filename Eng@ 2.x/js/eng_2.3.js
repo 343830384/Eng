@@ -10,7 +10,7 @@ uglifyjs eng_2.3.js -m -c -o eng_2.3.min.js   //压缩 =>   混淆,压缩,输出
 4.修复 for循环中 addWatcher ( {xxx:(Old,New,item){ },}) 的路径拼接错误
 5.修复 多级e-base嵌套的数据 覆盖错误 (会覆盖同级最后一个 同父名路径 , 例如:  同级别 'base0.abc','base0.def' 最后处理的会覆盖之前的,导致其中一个不生效 )
 6.修复 json或array类型数据直接覆盖导致的 , watcher关系失效 
-7.修复 json和array类型数据的覆盖方式为 赋值式 , 取消覆盖式 ( 因为会导致某些引用关系逻辑异常 )
+7.修改 json和array类型数据的覆盖方式为 赋值式 , 取消覆盖式 ( 因为会导致某些引用关系逻辑异常 )
 8.修复 深度使用时, for循环中自定义属性/方法, 因删除重新排列等导致的 响应异常
 */
 (function(){
@@ -1506,8 +1506,8 @@ Eng.prototype.dataInit=function(DATA){
                    //wFun : 匹配的watcher方法
                    wFun=$W[keyStr];
                    if(!del&&wFun){ //判断 watcher关系 
-                        delete $W[keyStr];                 // 
-                        reV=wFun.apply($f,[u,value,item]); //返回值
+                    //     delete $W[keyStr];              //  不再删除,防止,覆盖式赋值时,之前的watcher方法失效
+                        reV=wFun.apply($f,[u,value,item]); // 返回值
                         if(reV!==u){
                              value=reV;
                              obj[key]=reV;
